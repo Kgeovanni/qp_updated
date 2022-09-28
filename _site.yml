@@ -1,0 +1,15 @@
+name: "my-website"
+output_dir: "docs"
+navbar:
+  title: "QP Data Analysis" 
+  left:
+    - text: "Home"
+      href: qp_updated.html
+    - text: "About"
+      href: about.html
+output:
+  html_document:
+    theme: cosmo
+    toc: true
+    highlight: textmate
+    css: styles.css
