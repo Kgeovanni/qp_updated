@@ -177,7 +177,7 @@ summary(backward_data)
 ```
 
 
-# Analsyis by groups
+# Analysis by groups
 Data Analysis for nonLanguage Group
 The nonLanguage group consist of the teachers who only use one language in their professional work setting.
 

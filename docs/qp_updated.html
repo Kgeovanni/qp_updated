@@ -285,7 +285,7 @@ $(document).ready(function () {
 <li><a href="#loading-raw-data-for-flanker">Loading raw data for flanker</a></li>
 <li><a href="#loading-raw-data-for-stroop">Loading raw data for stroop</a></li>
 </ul></li>
-<li><a href="#analsyis-by-groups">Analsyis by groups</a>
+<li><a href="#analysis-by-groups">Analysis by groups</a>
 <ul>
 <li><a href="#linear-regression-model-for-nonlanguage-backward-task">Linear regression model for nonLanguage BACKWARD task</a></li>
 <li><a href="#linear-regression-model-for-nonlanguage-flanker-task">Linear regression model for nonLanguage FLANKER task</a></li>
@@ -443,20 +443,13 @@ all_data &lt;- read.csv(&quot;~/Desktop/RStudio_QP/experiment_data/all_data.csv&
 
 #summary
 summary(all_data)</code></pre>
-<pre><code>##  participant             age       
-##  Length:58          Min.   :22.00  
-##  Class :character   1st Qu.:32.00  
-##  Mode  :character   Median :38.00  
-##                     Mean   :39.19  
-##                     3rd Qu.:47.00  
-##                     Max.   :59.00  
-##        IQ         backward_correct
-##  Min.   : 60.00   Min.   :0.000   
-##  1st Qu.: 96.25   1st Qu.:1.000   
-##  Median :107.00   Median :4.000   
-##  Mean   :108.09   Mean   :3.138   
-##  3rd Qu.:122.25   3rd Qu.:5.000   
-##  Max.   :146.00   Max.   :6.000   
+<pre><code>##  participant             age              IQ         backward_correct
+##  Length:58          Min.   :22.00   Min.   : 60.00   Min.   :0.000   
+##  Class :character   1st Qu.:32.00   1st Qu.: 96.25   1st Qu.:1.000   
+##  Mode  :character   Median :38.00   Median :107.00   Median :4.000   
+##                     Mean   :39.19   Mean   :108.09   Mean   :3.138   
+##                     3rd Qu.:47.00   3rd Qu.:122.25   3rd Qu.:5.000   
+##                     Max.   :59.00   Max.   :146.00   Max.   :6.000   
 ##  flanker_correct stroop_correct 
 ##  Min.   : 0.00   Min.   : 0.00  
 ##  1st Qu.:40.50   1st Qu.:38.00  
@@ -489,19 +482,13 @@ summary(stroop_data)</code></pre>
 ## -32.427  -0.698   1.080   2.830   8.975 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept) 23.81077    6.56531   3.627 0.000637
-## bilingual   -0.07753    1.84059  -0.042 0.966556
-## age         -0.10015    0.08968  -1.117 0.269051
-## IQ           0.15701    0.04838   3.245 0.002017
-##                
-## (Intercept) ***
-## bilingual      
-## age            
-## IQ          ** 
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 23.81077    6.56531   3.627 0.000637 ***
+## bilingual   -0.07753    1.84059  -0.042 0.966556    
+## age         -0.10015    0.08968  -1.117 0.269051    
+## IQ           0.15701    0.04838   3.245 0.002017 ** 
 ## ---
-## Signif. codes:  
-## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 6.644 on 54 degrees of freedom
 ## Multiple R-squared:  0.1905, Adjusted R-squared:  0.1455 
@@ -517,19 +504,13 @@ summary(flanker_data)</code></pre>
 ## -36.778  -1.168   1.397   4.657  10.463 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept) 32.33555    7.96362   4.060 0.000159
-## bilingual   -0.32869    2.23261  -0.147 0.883504
-## age         -0.14152    0.10878  -1.301 0.198803
-## IQ           0.14108    0.05869   2.404 0.019679
-##                
-## (Intercept) ***
-## bilingual      
-## age            
-## IQ          *  
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 32.33555    7.96362   4.060 0.000159 ***
+## bilingual   -0.32869    2.23261  -0.147 0.883504    
+## age         -0.14152    0.10878  -1.301 0.198803    
+## IQ           0.14108    0.05869   2.404 0.019679 *  
 ## ---
-## Signif. codes:  
-## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 8.059 on 54 degrees of freedom
 ## Multiple R-squared:  0.1338, Adjusted R-squared:  0.08569 
@@ -545,48 +526,34 @@ summary(backward_data)</code></pre>
 ## -3.6784 -1.4709  0.4089  1.3641  2.6331 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept) -0.94033    1.83101  -0.514  0.60966
-## bilingual    0.56647    0.51333   1.104  0.27469
-## age         -0.02540    0.02501  -1.016  0.31429
-## IQ           0.04495    0.01349   3.332  0.00156
-##               
-## (Intercept)   
-## bilingual     
-## age           
-## IQ          **
+##             Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept) -0.94033    1.83101  -0.514  0.60966   
+## bilingual    0.56647    0.51333   1.104  0.27469   
+## age         -0.02540    0.02501  -1.016  0.31429   
+## IQ           0.04495    0.01349   3.332  0.00156 **
 ## ---
-## Signif. codes:  
-## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 1.853 on 54 degrees of freedom
 ## Multiple R-squared:  0.1901, Adjusted R-squared:  0.1451 
 ## F-statistic: 4.225 on 3 and 54 DF,  p-value: 0.009362</code></pre>
 </div>
 </div>
-<div id="analsyis-by-groups" class="section level1">
-<h1>Analsyis by groups</h1>
+<div id="analysis-by-groups" class="section level1">
+<h1>Analysis by groups</h1>
 <p>Data Analysis for nonLanguage Group The nonLanguage group consist of the teachers who only use one language in their professional work setting.</p>
 <div id="linear-regression-model-for-nonlanguage-backward-task" class="section level2">
 <h2>Linear regression model for nonLanguage BACKWARD task</h2>
 <pre class="r"><code>data(nonLanguage)</code></pre>
-<pre><code>## Warning in data(nonLanguage): data set
-## &#39;nonLanguage&#39; not found</code></pre>
+<pre><code>## Warning in data(nonLanguage): data set &#39;nonLanguage&#39; not found</code></pre>
 <pre class="r"><code>head(nonLanguage)</code></pre>
-<pre><code>##   participant age  IQ backward_correct
-## 1       adnm2  36 135                5
-## 2       bjfc1  40 108                4
-## 3       buzt0  30 146                5
-## 4       bwat2  34 128                1
-## 5       cbky9  49 135                4
-## 6       cfug6  34  63                0
-##   flanker_correct stroop_correct bilingual
-## 1              45             39         0
-## 2              44             38         0
-## 3              49             39         0
-## 4              46             39         0
-## 5              48             40         0
-## 6              27              2         0
+<pre><code>##   participant age  IQ backward_correct flanker_correct stroop_correct bilingual
+## 1       adnm2  36 135                5              45             39         0
+## 2       bjfc1  40 108                4              44             38         0
+## 3       buzt0  30 146                5              49             39         0
+## 4       bwat2  34 128                1              46             39         0
+## 5       cbky9  49 135                4              48             40         0
+## 6       cfug6  34  63                0              27              2         0
 ##      language
 ## 1 NonLanguage
 ## 2 NonLanguage
@@ -604,12 +571,11 @@ backward_model_nonLanguage &lt;- lm(backward_correct ~ age + IQ, data = nonLangu
 my_results &lt;- tidy(backward_model_nonLanguage)
 my_results</code></pre>
 <pre><code>## # A tibble: 3 × 5
-##   term        estimate std.error statis…¹ p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
-## 1 (Intercept) -0.194      2.35    -0.0828  0.934 
-## 2 age         -0.00622    0.0366  -0.170   0.866 
-## 3 IQ           0.0316     0.0154   2.05    0.0482
-## # … with abbreviated variable name ¹​statistic</code></pre>
+##   term        estimate std.error statistic p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 (Intercept) -0.194      2.35     -0.0828  0.934 
+## 2 age         -0.00622    0.0366   -0.170   0.866 
+## 3 IQ           0.0316     0.0154    2.05    0.0482</code></pre>
 <pre class="r"><code>backward_model_nonLanguage</code></pre>
 <pre><code>## 
 ## Call:
@@ -628,17 +594,12 @@ my_results</code></pre>
 ## -3.3658 -2.0974  0.6713  1.3846  2.6145 
 ## 
 ## Coefficients:
-##              Estimate Std. Error t value
-## (Intercept) -0.194378   2.346418  -0.083
-## age         -0.006223   0.036562  -0.170
-## IQ           0.031591   0.015400   2.051
-##             Pr(&gt;|t|)  
-## (Intercept)   0.9345  
-## age           0.8659  
-## IQ            0.0482 *
+##              Estimate Std. Error t value Pr(&gt;|t|)  
+## (Intercept) -0.194378   2.346418  -0.083   0.9345  
+## age         -0.006223   0.036562  -0.170   0.8659  
+## IQ           0.031591   0.015400   2.051   0.0482 *
 ## ---
-## Signif. codes:  
-## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 1.934 on 33 degrees of freedom
 ## Multiple R-squared:  0.1174, Adjusted R-squared:  0.06393 
@@ -662,19 +623,13 @@ summary(test2)</code></pre>
 ## -3.6784 -1.4709  0.4089  1.3641  2.6331 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept) -0.94033    1.83101  -0.514  0.60966
-## bilingual    0.56647    0.51333   1.104  0.27469
-## age         -0.02540    0.02501  -1.016  0.31429
-## IQ           0.04495    0.01349   3.332  0.00156
-##               
-## (Intercept)   
-## bilingual     
-## age           
-## IQ          **
+##             Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept) -0.94033    1.83101  -0.514  0.60966   
+## bilingual    0.56647    0.51333   1.104  0.27469   
+## age         -0.02540    0.02501  -1.016  0.31429   
+## IQ           0.04495    0.01349   3.332  0.00156 **
 ## ---
-## Signif. codes:  
-## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 1.853 on 54 degrees of freedom
 ## Multiple R-squared:  0.1901, Adjusted R-squared:  0.1451 
@@ -683,23 +638,15 @@ summary(test2)</code></pre>
 <div id="linear-regression-model-for-nonlanguage-flanker-task" class="section level2">
 <h2>Linear regression model for nonLanguage FLANKER task</h2>
 <pre class="r"><code>data(nonLanguage)</code></pre>
-<pre><code>## Warning in data(nonLanguage): data set
-## &#39;nonLanguage&#39; not found</code></pre>
+<pre><code>## Warning in data(nonLanguage): data set &#39;nonLanguage&#39; not found</code></pre>
 <pre class="r"><code>head(nonLanguage)</code></pre>
-<pre><code>##   participant age  IQ backward_correct
-## 1       adnm2  36 135                5
-## 2       bjfc1  40 108                4
-## 3       buzt0  30 146                5
-## 4       bwat2  34 128                1
-## 5       cbky9  49 135                4
-## 6       cfug6  34  63                0
-##   flanker_correct stroop_correct bilingual
-## 1              45             39         0
-## 2              44             38         0
-## 3              49             39         0
-## 4              46             39         0
-## 5              48             40         0
-## 6              27              2         0
+<pre><code>##   participant age  IQ backward_correct flanker_correct stroop_correct bilingual
+## 1       adnm2  36 135                5              45             39         0
+## 2       bjfc1  40 108                4              44             38         0
+## 3       buzt0  30 146                5              49             39         0
+## 4       bwat2  34 128                1              46             39         0
+## 5       cbky9  49 135                4              48             40         0
+## 6       cfug6  34  63                0              27              2         0
 ##      language
 ## 1 NonLanguage
 ## 2 NonLanguage
@@ -717,12 +664,11 @@ flanker_model_nonLanguage &lt;- lm(flanker_correct ~ age + IQ, data = nonLanguag
 my_results &lt;- tidy(flanker_model_nonLanguage)
 my_results</code></pre>
 <pre><code>## # A tibble: 3 × 5
-##   term        estimate std.error statis…¹ p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
-## 1 (Intercept)  28.1       6.91      4.07  2.78e-4
-## 2 age           0.0766    0.108     0.711 4.82e-1
-## 3 IQ            0.104     0.0454    2.30  2.82e-2
-## # … with abbreviated variable name ¹​statistic</code></pre>
+##   term        estimate std.error statistic  p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)  28.1       6.91       4.07  0.000278
+## 2 age           0.0766    0.108      0.711 0.482   
+## 3 IQ            0.104     0.0454     2.30  0.0282</code></pre>
 <pre class="r"><code>flanker_model_nonLanguage</code></pre>
 <pre><code>## 
 ## Call:
@@ -741,17 +687,12 @@ my_results</code></pre>
 ## -14.9680  -0.4283   1.4999   3.2503   8.2520 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept) 28.11861    6.91314   4.067 0.000278
-## age          0.07663    0.10772   0.711 0.481859
-## IQ           0.10418    0.04537   2.296 0.028156
-##                
-## (Intercept) ***
-## age            
-## IQ          *  
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 28.11861    6.91314   4.067 0.000278 ***
+## age          0.07663    0.10772   0.711 0.481859    
+## IQ           0.10418    0.04537   2.296 0.028156 *  
 ## ---
-## Signif. codes:  
-## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 5.699 on 33 degrees of freedom
 ## Multiple R-squared:  0.1419, Adjusted R-squared:  0.08992 
@@ -775,19 +716,13 @@ summary(test)</code></pre>
 ## -36.778  -1.168   1.397   4.657  10.463 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept) 32.33555    7.96362   4.060 0.000159
-## bilingual   -0.32869    2.23261  -0.147 0.883504
-## age         -0.14152    0.10878  -1.301 0.198803
-## IQ           0.14108    0.05869   2.404 0.019679
-##                
-## (Intercept) ***
-## bilingual      
-## age            
-## IQ          *  
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 32.33555    7.96362   4.060 0.000159 ***
+## bilingual   -0.32869    2.23261  -0.147 0.883504    
+## age         -0.14152    0.10878  -1.301 0.198803    
+## IQ           0.14108    0.05869   2.404 0.019679 *  
 ## ---
-## Signif. codes:  
-## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 8.059 on 54 degrees of freedom
 ## Multiple R-squared:  0.1338, Adjusted R-squared:  0.08569 
@@ -796,23 +731,15 @@ summary(test)</code></pre>
 <div id="linear-regression-model-for-nonlanguage-stroop-task" class="section level2">
 <h2>Linear regression model for nonLanguage STROOP task</h2>
 <pre class="r"><code>data(nonLanguage)</code></pre>
-<pre><code>## Warning in data(nonLanguage): data set
-## &#39;nonLanguage&#39; not found</code></pre>
+<pre><code>## Warning in data(nonLanguage): data set &#39;nonLanguage&#39; not found</code></pre>
 <pre class="r"><code>head(nonLanguage)</code></pre>
-<pre><code>##   participant age  IQ backward_correct
-## 1       adnm2  36 135                5
-## 2       bjfc1  40 108                4
-## 3       buzt0  30 146                5
-## 4       bwat2  34 128                1
-## 5       cbky9  49 135                4
-## 6       cfug6  34  63                0
-##   flanker_correct stroop_correct bilingual
-## 1              45             39         0
-## 2              44             38         0
-## 3              49             39         0
-## 4              46             39         0
-## 5              48             40         0
-## 6              27              2         0
+<pre><code>##   participant age  IQ backward_correct flanker_correct stroop_correct bilingual
+## 1       adnm2  36 135                5              45             39         0
+## 2       bjfc1  40 108                4              44             38         0
+## 3       buzt0  30 146                5              49             39         0
+## 4       bwat2  34 128                1              46             39         0
+## 5       cbky9  49 135                4              48             40         0
+## 6       cfug6  34  63                0              27              2         0
 ##      language
 ## 1 NonLanguage
 ## 2 NonLanguage
@@ -826,18 +753,17 @@ plot(stroop_correct ~ age + IQ, data = nonLanguage, pch=16)</code></pre>
 <pre class="r"><code>#linear model
 stroop_model_nonLanguage &lt;- lm(stroop_correct ~ age + IQ, data = nonLanguage)
 abline(stroop_model_nonLanguage)</code></pre>
-<pre><code>## Warning in abline(stroop_model_nonLanguage): only
-## using the first two of 3 regression coefficients</code></pre>
+<pre><code>## Warning in abline(stroop_model_nonLanguage): only using the first two of 3
+## regression coefficients</code></pre>
 <p><img src="qp_updated_files/figure-html/unnamed-chunk-11-2.png" width="672" /></p>
 <pre class="r"><code>my_results &lt;- tidy(stroop_model_nonLanguage)
 my_results</code></pre>
 <pre><code>## # A tibble: 3 × 5
-##   term        estimate std.error statis…¹ p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
-## 1 (Intercept)  19.4       6.94      2.79  0.00863
-## 2 age           0.0714    0.108     0.660 0.514  
-## 3 IQ            0.138     0.0456    3.03  0.00474
-## # … with abbreviated variable name ¹​statistic</code></pre>
+##   term        estimate std.error statistic p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 (Intercept)  19.4       6.94       2.79  0.00863
+## 2 age           0.0714    0.108      0.660 0.514  
+## 3 IQ            0.138     0.0456     3.03  0.00474</code></pre>
 <pre class="r"><code>stroop_model_nonLanguage</code></pre>
 <pre><code>## 
 ## Call:
@@ -856,17 +782,12 @@ my_results</code></pre>
 ## -28.5108  -1.5472   0.5263   2.1878   7.3319 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept) 19.38713    6.94219   2.793  0.00863
-## age          0.07142    0.10817   0.660  0.51370
-## IQ           0.13802    0.04556   3.029  0.00474
-##               
-## (Intercept) **
-## age           
-## IQ          **
+##             Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept) 19.38713    6.94219   2.793  0.00863 **
+## age          0.07142    0.10817   0.660  0.51370   
+## IQ           0.13802    0.04556   3.029  0.00474 **
 ## ---
-## Signif. codes:  
-## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 5.723 on 33 degrees of freedom
 ## Multiple R-squared:  0.2191, Adjusted R-squared:  0.1718 
@@ -889,19 +810,13 @@ summary(test3)</code></pre>
 ## -32.427  -0.698   1.080   2.830   8.975 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept) 23.81077    6.56531   3.627 0.000637
-## bilingual   -0.07753    1.84059  -0.042 0.966556
-## age         -0.10015    0.08968  -1.117 0.269051
-## IQ           0.15701    0.04838   3.245 0.002017
-##                
-## (Intercept) ***
-## bilingual      
-## age            
-## IQ          ** 
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 23.81077    6.56531   3.627 0.000637 ***
+## bilingual   -0.07753    1.84059  -0.042 0.966556    
+## age         -0.10015    0.08968  -1.117 0.269051    
+## IQ           0.15701    0.04838   3.245 0.002017 ** 
 ## ---
-## Signif. codes:  
-## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 6.644 on 54 degrees of freedom
 ## Multiple R-squared:  0.1905, Adjusted R-squared:  0.1455 
@@ -914,48 +829,39 @@ summary(test3)</code></pre>
 <div id="linear-regression-model-for-language-backward" class="section level2">
 <h2>Linear regression model for language BACKWARD</h2>
 <pre class="r"><code>data(language)</code></pre>
-<pre><code>## Warning in data(language): data set &#39;language&#39;
-## not found</code></pre>
+<pre><code>## Warning in data(language): data set &#39;language&#39; not found</code></pre>
 <pre class="r"><code>head(language)</code></pre>
-<pre><code>##    participant age  IQ backward_correct
-## 37    bi_ajli0  35  94                4
-## 38    bi_dckv1  30 105                4
-## 39    bi_dvyf7  58 105                5
-## 40    bi_evur7  42  93                0
-## 41    bi_giah0  23 102                5
-## 42    bi_igsy3  50 120                6
-##    flanker_correct stroop_correct bilingual
-## 37              45             38         1
-## 38              49             38         1
-## 39              37             39         1
-## 40              40             34         1
-## 41              44             39         1
-## 42              49             39         1
-##    language
-## 37 Language
-## 38 Language
-## 39 Language
-## 40 Language
-## 41 Language
-## 42 Language</code></pre>
+<pre><code>##    participant age  IQ backward_correct flanker_correct stroop_correct
+## 37    bi_ajli0  35  94                4              45             38
+## 38    bi_dckv1  30 105                4              49             38
+## 39    bi_dvyf7  58 105                5              37             39
+## 40    bi_evur7  42  93                0              40             34
+## 41    bi_giah0  23 102                5              44             39
+## 42    bi_igsy3  50 120                6              49             39
+##    bilingual language
+## 37         1 Language
+## 38         1 Language
+## 39         1 Language
+## 40         1 Language
+## 41         1 Language
+## 42         1 Language</code></pre>
 <pre class="r"><code>#plot Language
 plot(backward_correct ~ age + IQ, data = language, pch=16)</code></pre>
 <p><img src="qp_updated_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <pre class="r"><code>#linear model
 backward_model_language &lt;- lm(backward_correct ~ age + IQ, data = language)
 abline(backward_model_language)</code></pre>
-<pre><code>## Warning in abline(backward_model_language): only
-## using the first two of 3 regression coefficients</code></pre>
+<pre><code>## Warning in abline(backward_model_language): only using the first two of 3
+## regression coefficients</code></pre>
 <p><img src="qp_updated_files/figure-html/unnamed-chunk-12-2.png" width="672" /></p>
 <pre class="r"><code>my_results &lt;- tidy(backward_model_language)
 my_results</code></pre>
 <pre><code>## # A tibble: 3 × 5
-##   term        estimate std.error statis…¹ p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
-## 1 (Intercept)  -7.69      2.80      -2.75 1.28e-2
-## 2 age          -0.0609    0.0269    -2.27 3.52e-2
-## 3 IQ            0.129     0.0258     5.00 7.95e-5
-## # … with abbreviated variable name ¹​statistic</code></pre>
+##   term        estimate std.error statistic   p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)  -7.69      2.80       -2.75 0.0128   
+## 2 age          -0.0609    0.0269     -2.27 0.0352   
+## 3 IQ            0.129     0.0258      5.00 0.0000795</code></pre>
 <pre class="r"><code>backward_model_language</code></pre>
 <pre><code>## 
 ## Call:
@@ -974,17 +880,12 @@ my_results</code></pre>
 ## -2.32845 -0.81186 -0.07596  0.90055  2.67241 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept) -7.69311    2.79829  -2.749   0.0128
-## age         -0.06092    0.02687  -2.267   0.0352
-## IQ           0.12908    0.02582   5.000 7.95e-05
-##                
-## (Intercept) *  
-## age         *  
-## IQ          ***
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -7.69311    2.79829  -2.749   0.0128 *  
+## age         -0.06092    0.02687  -2.267   0.0352 *  
+## IQ           0.12908    0.02582   5.000 7.95e-05 ***
 ## ---
-## Signif. codes:  
-## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 1.375 on 19 degrees of freedom
 ## Multiple R-squared:  0.5937, Adjusted R-squared:  0.5509 
@@ -1000,48 +901,39 @@ plot(backward_model_language) </code></pre>
 <div id="linear-regression-model-for-language-flanker" class="section level2">
 <h2>Linear regression model for language FLANKER</h2>
 <pre class="r"><code>data(language)</code></pre>
-<pre><code>## Warning in data(language): data set &#39;language&#39;
-## not found</code></pre>
+<pre><code>## Warning in data(language): data set &#39;language&#39; not found</code></pre>
 <pre class="r"><code>head(language)</code></pre>
-<pre><code>##    participant age  IQ backward_correct
-## 37    bi_ajli0  35  94                4
-## 38    bi_dckv1  30 105                4
-## 39    bi_dvyf7  58 105                5
-## 40    bi_evur7  42  93                0
-## 41    bi_giah0  23 102                5
-## 42    bi_igsy3  50 120                6
-##    flanker_correct stroop_correct bilingual
-## 37              45             38         1
-## 38              49             38         1
-## 39              37             39         1
-## 40              40             34         1
-## 41              44             39         1
-## 42              49             39         1
-##    language
-## 37 Language
-## 38 Language
-## 39 Language
-## 40 Language
-## 41 Language
-## 42 Language</code></pre>
+<pre><code>##    participant age  IQ backward_correct flanker_correct stroop_correct
+## 37    bi_ajli0  35  94                4              45             38
+## 38    bi_dckv1  30 105                4              49             38
+## 39    bi_dvyf7  58 105                5              37             39
+## 40    bi_evur7  42  93                0              40             34
+## 41    bi_giah0  23 102                5              44             39
+## 42    bi_igsy3  50 120                6              49             39
+##    bilingual language
+## 37         1 Language
+## 38         1 Language
+## 39         1 Language
+## 40         1 Language
+## 41         1 Language
+## 42         1 Language</code></pre>
 <pre class="r"><code>#plot Language
 plot(flanker_correct ~ age + IQ, data = language, pch=16)</code></pre>
 <p><img src="qp_updated_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <pre class="r"><code>#linear model
 flanker_model_language &lt;- lm(flanker_correct ~ age + IQ, data = language)
 abline(flanker_model_language)</code></pre>
-<pre><code>## Warning in abline(flanker_model_language): only
-## using the first two of 3 regression coefficients</code></pre>
+<pre><code>## Warning in abline(flanker_model_language): only using the first two of 3
+## regression coefficients</code></pre>
 <p><img src="qp_updated_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
 <pre class="r"><code>my_results &lt;- tidy(flanker_model_language)
 my_results</code></pre>
 <pre><code>## # A tibble: 3 × 5
-##   term        estimate std.error statis…¹ p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
-## 1 (Intercept)   12.1      20.1      0.605  0.552 
-## 2 age           -0.425     0.193   -2.21   0.0399
-## 3 IQ             0.443     0.185    2.39   0.0271
-## # … with abbreviated variable name ¹​statistic</code></pre>
+##   term        estimate std.error statistic p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 (Intercept)   12.1      20.1       0.605  0.552 
+## 2 age           -0.425     0.193    -2.21   0.0399
+## 3 IQ             0.443     0.185     2.39   0.0271</code></pre>
 <pre class="r"><code>flanker_model_language</code></pre>
 <pre><code>## 
 ## Call:
@@ -1060,17 +952,12 @@ my_results</code></pre>
 ## -28.278  -1.917   2.854   4.847  11.242 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept)  12.1411    20.0687   0.605   0.5523
-## age          -0.4251     0.1927  -2.207   0.0399
-## IQ            0.4432     0.1851   2.394   0.0271
-##              
-## (Intercept)  
-## age         *
-## IQ          *
+##             Estimate Std. Error t value Pr(&gt;|t|)  
+## (Intercept)  12.1411    20.0687   0.605   0.5523  
+## age          -0.4251     0.1927  -2.207   0.0399 *
+## IQ            0.4432     0.1851   2.394   0.0271 *
 ## ---
-## Signif. codes:  
-## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 9.858 on 19 degrees of freedom
 ## Multiple R-squared:  0.3319, Adjusted R-squared:  0.2616 
@@ -1086,30 +973,22 @@ plot(flanker_model_language) </code></pre>
 <div id="linear-regression-model-for-language-stroop" class="section level2">
 <h2>Linear regression model for language STROOP</h2>
 <pre class="r"><code>data(language)</code></pre>
-<pre><code>## Warning in data(language): data set &#39;language&#39;
-## not found</code></pre>
+<pre><code>## Warning in data(language): data set &#39;language&#39; not found</code></pre>
 <pre class="r"><code>head(language)</code></pre>
-<pre><code>##    participant age  IQ backward_correct
-## 37    bi_ajli0  35  94                4
-## 38    bi_dckv1  30 105                4
-## 39    bi_dvyf7  58 105                5
-## 40    bi_evur7  42  93                0
-## 41    bi_giah0  23 102                5
-## 42    bi_igsy3  50 120                6
-##    flanker_correct stroop_correct bilingual
-## 37              45             38         1
-## 38              49             38         1
-## 39              37             39         1
-## 40              40             34         1
-## 41              44             39         1
-## 42              49             39         1
-##    language
-## 37 Language
-## 38 Language
-## 39 Language
-## 40 Language
-## 41 Language
-## 42 Language</code></pre>
+<pre><code>##    participant age  IQ backward_correct flanker_correct stroop_correct
+## 37    bi_ajli0  35  94                4              45             38
+## 38    bi_dckv1  30 105                4              49             38
+## 39    bi_dvyf7  58 105                5              37             39
+## 40    bi_evur7  42  93                0              40             34
+## 41    bi_giah0  23 102                5              44             39
+## 42    bi_igsy3  50 120                6              49             39
+##    bilingual language
+## 37         1 Language
+## 38         1 Language
+## 39         1 Language
+## 40         1 Language
+## 41         1 Language
+## 42         1 Language</code></pre>
 <pre class="r"><code>#plot Language
 par(mfrow = c(2,2))
 plot(stroop_correct ~ age + IQ, data = language, pch=16)
@@ -1124,12 +1003,11 @@ par(mfrow = c(2,2))</code></pre>
 my_results &lt;- tidy(stroop_model_language)
 my_results</code></pre>
 <pre><code>## # A tibble: 3 × 5
-##   term        estimate std.error statis…¹ p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
-## 1 (Intercept)   13.6      14.9      0.914  0.372 
-## 2 age           -0.313     0.143   -2.18   0.0417
-## 3 IQ             0.338     0.138    2.45   0.0240
-## # … with abbreviated variable name ¹​statistic</code></pre>
+##   term        estimate std.error statistic p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 (Intercept)   13.6      14.9       0.914  0.372 
+## 2 age           -0.313     0.143    -2.18   0.0417
+## 3 IQ             0.338     0.138     2.45   0.0240</code></pre>
 <pre class="r"><code>stroop_model_language</code></pre>
 <pre><code>## 
 ## Call:
@@ -1148,17 +1026,12 @@ my_results</code></pre>
 ## -26.5774  -1.6728   0.3679   2.9557  11.9590 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept)  13.6334    14.9160   0.914   0.3722
-## age          -0.3127     0.1432  -2.184   0.0417
-## IQ            0.3376     0.1376   2.453   0.0240
-##              
-## (Intercept)  
-## age         *
-## IQ          *
+##             Estimate Std. Error t value Pr(&gt;|t|)  
+## (Intercept)  13.6334    14.9160   0.914   0.3722  
+## age          -0.3127     0.1432  -2.184   0.0417 *
+## IQ            0.3376     0.1376   2.453   0.0240 *
 ## ---
-## Signif. codes:  
-## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 7.327 on 19 degrees of freedom
 ## Multiple R-squared:  0.3359, Adjusted R-squared:  0.266 
@@ -1178,11 +1051,6 @@ plot(stroop_model_language) </code></pre>
 <pre><code>## The following object is masked _by_ .GlobalEnv:
 ## 
 ##     language</code></pre>
-<pre><code>## The following objects are masked from all_data (pos = 3):
-## 
-##     age, backward_correct, bilingual,
-##     flanker_correct, IQ, language,
-##     participant, stroop_correct</code></pre>
 <pre class="r"><code>hist(backward_correct) #this could be considered &quot;normal&quot;</code></pre>
 <p><img src="qp_updated_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <pre class="r"><code>hist(flanker_correct) #not normal</code></pre>
@@ -1190,34 +1058,20 @@ plot(stroop_model_language) </code></pre>
 <pre class="r"><code>hist(stroop_correct) #not normal</code></pre>
 <p><img src="qp_updated_files/figure-html/unnamed-chunk-15-3.png" width="672" /></p>
 <pre class="r"><code>summary(all_data)</code></pre>
-<pre><code>##  participant             age       
-##  Length:58          Min.   :22.00  
-##  Class :character   1st Qu.:32.00  
-##  Mode  :character   Median :38.00  
-##                     Mean   :39.19  
-##                     3rd Qu.:47.00  
-##                     Max.   :59.00  
-##        IQ         backward_correct
-##  Min.   : 60.00   Min.   :0.000   
-##  1st Qu.: 96.25   1st Qu.:1.000   
-##  Median :107.00   Median :4.000   
-##  Mean   :108.09   Mean   :3.138   
-##  3rd Qu.:122.25   3rd Qu.:5.000   
-##  Max.   :146.00   Max.   :6.000   
-##  flanker_correct stroop_correct 
-##  Min.   : 0.00   Min.   : 0.00  
-##  1st Qu.:40.50   1st Qu.:38.00  
-##  Median :45.00   Median :39.00  
-##  Mean   :41.91   Mean   :36.83  
-##  3rd Qu.:47.00   3rd Qu.:40.00  
-##  Max.   :49.00   Max.   :40.00  
-##    bilingual        language        
-##  Min.   :0.0000   Length:58         
-##  1st Qu.:0.0000   Class :character  
-##  Median :0.0000   Mode  :character  
-##  Mean   :0.3793                     
-##  3rd Qu.:1.0000                     
-##  Max.   :1.0000</code></pre>
+<pre><code>##  participant             age              IQ         backward_correct
+##  Length:58          Min.   :22.00   Min.   : 60.00   Min.   :0.000   
+##  Class :character   1st Qu.:32.00   1st Qu.: 96.25   1st Qu.:1.000   
+##  Mode  :character   Median :38.00   Median :107.00   Median :4.000   
+##                     Mean   :39.19   Mean   :108.09   Mean   :3.138   
+##                     3rd Qu.:47.00   3rd Qu.:122.25   3rd Qu.:5.000   
+##                     Max.   :59.00   Max.   :146.00   Max.   :6.000   
+##  flanker_correct stroop_correct    bilingual        language        
+##  Min.   : 0.00   Min.   : 0.00   Min.   :0.0000   Length:58         
+##  1st Qu.:40.50   1st Qu.:38.00   1st Qu.:0.0000   Class :character  
+##  Median :45.00   Median :39.00   Median :0.0000   Mode  :character  
+##  Mean   :41.91   Mean   :36.83   Mean   :0.3793                     
+##  3rd Qu.:47.00   3rd Qu.:40.00   3rd Qu.:1.0000                     
+##  Max.   :49.00   Max.   :40.00   Max.   :1.0000</code></pre>
 <p>#————————————————————————-#</p>
 </div>
 <div id="removing-1-data-45-which-is-considered-an-outlier." class="section level2">
@@ -1229,34 +1083,20 @@ new_all_data &lt;- all_data[-c(45),]
 new_language &lt;- new_all_data[37:58, ]
 
 summary(new_all_data)</code></pre>
-<pre><code>##  participant             age       
-##  Length:57          Min.   :22.00  
-##  Class :character   1st Qu.:32.00  
-##  Mode  :character   Median :38.00  
-##                     Mean   :38.84  
-##                     3rd Qu.:47.00  
-##                     Max.   :58.00  
-##        IQ        backward_correct
-##  Min.   : 60.0   Min.   :0.000   
-##  1st Qu.: 97.0   1st Qu.:1.000   
-##  Median :107.0   Median :4.000   
-##  Mean   :108.4   Mean   :3.193   
-##  3rd Qu.:123.0   3rd Qu.:5.000   
-##  Max.   :146.0   Max.   :6.000   
-##  flanker_correct stroop_correct 
-##  Min.   :26.00   Min.   : 2.00  
-##  1st Qu.:42.00   1st Qu.:38.00  
-##  Median :45.00   Median :39.00  
-##  Mean   :42.65   Mean   :37.47  
-##  3rd Qu.:47.00   3rd Qu.:40.00  
-##  Max.   :49.00   Max.   :40.00  
-##    bilingual        language        
-##  Min.   :0.0000   Length:57         
-##  1st Qu.:0.0000   Class :character  
-##  Median :0.0000   Mode  :character  
-##  Mean   :0.3684                     
-##  3rd Qu.:1.0000                     
-##  Max.   :1.0000</code></pre>
+<pre><code>##  participant             age              IQ        backward_correct
+##  Length:57          Min.   :22.00   Min.   : 60.0   Min.   :0.000   
+##  Class :character   1st Qu.:32.00   1st Qu.: 97.0   1st Qu.:1.000   
+##  Mode  :character   Median :38.00   Median :107.0   Median :4.000   
+##                     Mean   :38.84   Mean   :108.4   Mean   :3.193   
+##                     3rd Qu.:47.00   3rd Qu.:123.0   3rd Qu.:5.000   
+##                     Max.   :58.00   Max.   :146.0   Max.   :6.000   
+##  flanker_correct stroop_correct    bilingual        language        
+##  Min.   :26.00   Min.   : 2.00   Min.   :0.0000   Length:57         
+##  1st Qu.:42.00   1st Qu.:38.00   1st Qu.:0.0000   Class :character  
+##  Median :45.00   Median :39.00   Median :0.0000   Mode  :character  
+##  Mean   :42.65   Mean   :37.47   Mean   :0.3684                     
+##  3rd Qu.:47.00   3rd Qu.:40.00   3rd Qu.:1.0000                     
+##  Max.   :49.00   Max.   :40.00   Max.   :1.0000</code></pre>
 </div>
 </div>
 <div id="linear-regression-for-stroop" class="section level1">
@@ -1273,31 +1113,25 @@ summary(stroop_data)</code></pre>
 ## -28.7243  -1.5098   0.4402   2.1226   7.5599 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept) 21.46556    4.72117   4.547  3.2e-05
-## bilingual    1.09761    1.33047   0.825 0.413081
-## age          0.01630    0.06634   0.246 0.806907
-## IQ           0.13817    0.03481   3.970 0.000218
-##                
-## (Intercept) ***
-## bilingual      
-## age            
-## IQ          ***
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 21.46556    4.72117   4.547  3.2e-05 ***
+## bilingual    1.09761    1.33047   0.825 0.413081    
+## age          0.01630    0.06634   0.246 0.806907    
+## IQ           0.13817    0.03481   3.970 0.000218 ***
 ## ---
-## Signif. codes:  
-## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 4.766 on 53 degrees of freedom
 ## Multiple R-squared:  0.2303, Adjusted R-squared:  0.1868 
 ## F-statistic: 5.287 on 3 and 53 DF,  p-value: 0.002903</code></pre>
 <pre class="r"><code>#table for summary results
 tbl_regression(stroop_data, exponentiate = FALSE) #created table</code></pre>
-<div id="llnsxnoimk" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="pluuuuvhmr" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#llnsxnoimk .gt_table {
+#pluuuuvhmr .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1322,7 +1156,7 @@ tbl_regression(stroop_data, exponentiate = FALSE) #created table</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#llnsxnoimk .gt_heading {
+#pluuuuvhmr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1334,7 +1168,7 @@ tbl_regression(stroop_data, exponentiate = FALSE) #created table</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#llnsxnoimk .gt_title {
+#pluuuuvhmr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1346,7 +1180,7 @@ tbl_regression(stroop_data, exponentiate = FALSE) #created table</code></pre>
   border-bottom-width: 0;
 }
 
-#llnsxnoimk .gt_subtitle {
+#pluuuuvhmr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1358,13 +1192,13 @@ tbl_regression(stroop_data, exponentiate = FALSE) #created table</code></pre>
   border-top-width: 0;
 }
 
-#llnsxnoimk .gt_bottom_border {
+#pluuuuvhmr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#llnsxnoimk .gt_col_headings {
+#pluuuuvhmr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1379,7 +1213,7 @@ tbl_regression(stroop_data, exponentiate = FALSE) #created table</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#llnsxnoimk .gt_col_heading {
+#pluuuuvhmr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1399,7 +1233,7 @@ tbl_regression(stroop_data, exponentiate = FALSE) #created table</code></pre>
   overflow-x: hidden;
 }
 
-#llnsxnoimk .gt_column_spanner_outer {
+#pluuuuvhmr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1411,15 +1245,15 @@ tbl_regression(stroop_data, exponentiate = FALSE) #created table</code></pre>
   padding-right: 4px;
 }
 
-#llnsxnoimk .gt_column_spanner_outer:first-child {
+#pluuuuvhmr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#llnsxnoimk .gt_column_spanner_outer:last-child {
+#pluuuuvhmr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#llnsxnoimk .gt_column_spanner {
+#pluuuuvhmr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1431,7 +1265,7 @@ tbl_regression(stroop_data, exponentiate = FALSE) #created table</code></pre>
   width: 100%;
 }
 
-#llnsxnoimk .gt_group_heading {
+#pluuuuvhmr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1456,7 +1290,7 @@ tbl_regression(stroop_data, exponentiate = FALSE) #created table</code></pre>
   vertical-align: middle;
 }
 
-#llnsxnoimk .gt_empty_group_heading {
+#pluuuuvhmr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1471,15 +1305,15 @@ tbl_regression(stroop_data, exponentiate = FALSE) #created table</code></pre>
   vertical-align: middle;
 }
 
-#llnsxnoimk .gt_from_md > :first-child {
+#pluuuuvhmr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#llnsxnoimk .gt_from_md > :last-child {
+#pluuuuvhmr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#llnsxnoimk .gt_row {
+#pluuuuvhmr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1498,7 +1332,7 @@ tbl_regression(stroop_data, exponentiate = FALSE) #created table</code></pre>
   overflow-x: hidden;
 }
 
-#llnsxnoimk .gt_stub {
+#pluuuuvhmr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1511,7 +1345,7 @@ tbl_regression(stroop_data, exponentiate = FALSE) #created table</code></pre>
   padding-right: 5px;
 }
 
-#llnsxnoimk .gt_stub_row_group {
+#pluuuuvhmr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1525,11 +1359,11 @@ tbl_regression(stroop_data, exponentiate = FALSE) #created table</code></pre>
   vertical-align: top;
 }
 
-#llnsxnoimk .gt_row_group_first td {
+#pluuuuvhmr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#llnsxnoimk .gt_summary_row {
+#pluuuuvhmr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1539,16 +1373,16 @@ tbl_regression(stroop_data, exponentiate = FALSE) #created table</code></pre>
   padding-right: 5px;
 }
 
-#llnsxnoimk .gt_first_summary_row {
+#pluuuuvhmr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#llnsxnoimk .gt_first_summary_row.thick {
+#pluuuuvhmr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#llnsxnoimk .gt_last_summary_row {
+#pluuuuvhmr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1558,7 +1392,7 @@ tbl_regression(stroop_data, exponentiate = FALSE) #created table</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#llnsxnoimk .gt_grand_summary_row {
+#pluuuuvhmr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1568,7 +1402,7 @@ tbl_regression(stroop_data, exponentiate = FALSE) #created table</code></pre>
   padding-right: 5px;
 }
 
-#llnsxnoimk .gt_first_grand_summary_row {
+#pluuuuvhmr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1578,11 +1412,11 @@ tbl_regression(stroop_data, exponentiate = FALSE) #created table</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#llnsxnoimk .gt_striped {
+#pluuuuvhmr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#llnsxnoimk .gt_table_body {
+#pluuuuvhmr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1591,7 +1425,7 @@ tbl_regression(stroop_data, exponentiate = FALSE) #created table</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#llnsxnoimk .gt_footnotes {
+#pluuuuvhmr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1605,7 +1439,7 @@ tbl_regression(stroop_data, exponentiate = FALSE) #created table</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#llnsxnoimk .gt_footnote {
+#pluuuuvhmr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1614,7 +1448,7 @@ tbl_regression(stroop_data, exponentiate = FALSE) #created table</code></pre>
   padding-right: 5px;
 }
 
-#llnsxnoimk .gt_sourcenotes {
+#pluuuuvhmr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1628,7 +1462,7 @@ tbl_regression(stroop_data, exponentiate = FALSE) #created table</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#llnsxnoimk .gt_sourcenote {
+#pluuuuvhmr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1636,64 +1470,64 @@ tbl_regression(stroop_data, exponentiate = FALSE) #created table</code></pre>
   padding-right: 5px;
 }
 
-#llnsxnoimk .gt_left {
+#pluuuuvhmr .gt_left {
   text-align: left;
 }
 
-#llnsxnoimk .gt_center {
+#pluuuuvhmr .gt_center {
   text-align: center;
 }
 
-#llnsxnoimk .gt_right {
+#pluuuuvhmr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#llnsxnoimk .gt_font_normal {
+#pluuuuvhmr .gt_font_normal {
   font-weight: normal;
 }
 
-#llnsxnoimk .gt_font_bold {
+#pluuuuvhmr .gt_font_bold {
   font-weight: bold;
 }
 
-#llnsxnoimk .gt_font_italic {
+#pluuuuvhmr .gt_font_italic {
   font-style: italic;
 }
 
-#llnsxnoimk .gt_super {
+#pluuuuvhmr .gt_super {
   font-size: 65%;
 }
 
-#llnsxnoimk .gt_footnote_marks {
+#pluuuuvhmr .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#llnsxnoimk .gt_asterisk {
+#pluuuuvhmr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#llnsxnoimk .gt_indent_1 {
+#pluuuuvhmr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#llnsxnoimk .gt_indent_2 {
+#pluuuuvhmr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#llnsxnoimk .gt_indent_3 {
+#pluuuuvhmr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#llnsxnoimk .gt_indent_4 {
+#pluuuuvhmr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#llnsxnoimk .gt_indent_5 {
+#pluuuuvhmr .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1885,13 +1719,12 @@ IQ
 </table>
 <pre class="r"><code>broom::tidy(stroop_data) #table for summary</code></pre>
 <pre><code>## # A tibble: 4 × 5
-##   term        estimate std.error statis…¹ p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
-## 1 (Intercept)  21.5       4.72      4.55  3.20e-5
-## 2 bilingual     1.10      1.33      0.825 4.13e-1
-## 3 age           0.0163    0.0663    0.246 8.07e-1
-## 4 IQ            0.138     0.0348    3.97  2.18e-4
-## # … with abbreviated variable name ¹​statistic</code></pre>
+##   term        estimate std.error statistic   p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)  21.5       4.72       4.55  0.0000320
+## 2 bilingual     1.10      1.33       0.825 0.413    
+## 3 age           0.0163    0.0663     0.246 0.807    
+## 4 IQ            0.138     0.0348     3.97  0.000218</code></pre>
 <pre class="r"><code>#Table for Stroop lm results
 tab_model(stroop_data,
           dv.labels = c(&quot;Stroop Task&quot;),
@@ -2024,30 +1857,24 @@ summary(flanker_data)</code></pre>
 ## -16.9626  -0.5461   1.5371   3.9393   9.1539 
 ## 
 ## Coefficients:
-##              Estimate Std. Error t value
-## (Intercept) 29.675659   6.069105   4.890
-## bilingual    1.004132   1.710328   0.587
-## age         -0.009448   0.085276  -0.111
-## IQ           0.119708   0.044746   2.675
-##             Pr(&gt;|t|)    
-## (Intercept) 9.78e-06 ***
-## bilingual    0.55963    
-## age          0.91220    
-## IQ           0.00991 ** 
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 29.675659   6.069105   4.890 9.78e-06 ***
+## bilingual    1.004132   1.710328   0.587  0.55963    
+## age         -0.009448   0.085276  -0.111  0.91220    
+## IQ           0.119708   0.044746   2.675  0.00991 ** 
 ## ---
-## Signif. codes:  
-## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 6.127 on 53 degrees of freedom
 ## Multiple R-squared:   0.12,  Adjusted R-squared:  0.07024 
 ## F-statistic:  2.41 on 3 and 53 DF,  p-value: 0.07715</code></pre>
 <pre class="r"><code>tbl_regression(flanker_data, exponentiate = FALSE,) #created table</code></pre>
-<div id="mjspfnpiht" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="luscofxaet" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#mjspfnpiht .gt_table {
+#luscofxaet .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2072,7 +1899,7 @@ summary(flanker_data)</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#mjspfnpiht .gt_heading {
+#luscofxaet .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2084,7 +1911,7 @@ summary(flanker_data)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#mjspfnpiht .gt_title {
+#luscofxaet .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2096,7 +1923,7 @@ summary(flanker_data)</code></pre>
   border-bottom-width: 0;
 }
 
-#mjspfnpiht .gt_subtitle {
+#luscofxaet .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2108,13 +1935,13 @@ summary(flanker_data)</code></pre>
   border-top-width: 0;
 }
 
-#mjspfnpiht .gt_bottom_border {
+#luscofxaet .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mjspfnpiht .gt_col_headings {
+#luscofxaet .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2129,7 +1956,7 @@ summary(flanker_data)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#mjspfnpiht .gt_col_heading {
+#luscofxaet .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2149,7 +1976,7 @@ summary(flanker_data)</code></pre>
   overflow-x: hidden;
 }
 
-#mjspfnpiht .gt_column_spanner_outer {
+#luscofxaet .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2161,15 +1988,15 @@ summary(flanker_data)</code></pre>
   padding-right: 4px;
 }
 
-#mjspfnpiht .gt_column_spanner_outer:first-child {
+#luscofxaet .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mjspfnpiht .gt_column_spanner_outer:last-child {
+#luscofxaet .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mjspfnpiht .gt_column_spanner {
+#luscofxaet .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2181,7 +2008,7 @@ summary(flanker_data)</code></pre>
   width: 100%;
 }
 
-#mjspfnpiht .gt_group_heading {
+#luscofxaet .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2206,7 +2033,7 @@ summary(flanker_data)</code></pre>
   vertical-align: middle;
 }
 
-#mjspfnpiht .gt_empty_group_heading {
+#luscofxaet .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2221,15 +2048,15 @@ summary(flanker_data)</code></pre>
   vertical-align: middle;
 }
 
-#mjspfnpiht .gt_from_md > :first-child {
+#luscofxaet .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mjspfnpiht .gt_from_md > :last-child {
+#luscofxaet .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mjspfnpiht .gt_row {
+#luscofxaet .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2248,7 +2075,7 @@ summary(flanker_data)</code></pre>
   overflow-x: hidden;
 }
 
-#mjspfnpiht .gt_stub {
+#luscofxaet .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2261,7 +2088,7 @@ summary(flanker_data)</code></pre>
   padding-right: 5px;
 }
 
-#mjspfnpiht .gt_stub_row_group {
+#luscofxaet .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2275,11 +2102,11 @@ summary(flanker_data)</code></pre>
   vertical-align: top;
 }
 
-#mjspfnpiht .gt_row_group_first td {
+#luscofxaet .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mjspfnpiht .gt_summary_row {
+#luscofxaet .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2289,16 +2116,16 @@ summary(flanker_data)</code></pre>
   padding-right: 5px;
 }
 
-#mjspfnpiht .gt_first_summary_row {
+#luscofxaet .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mjspfnpiht .gt_first_summary_row.thick {
+#luscofxaet .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mjspfnpiht .gt_last_summary_row {
+#luscofxaet .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2308,7 +2135,7 @@ summary(flanker_data)</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#mjspfnpiht .gt_grand_summary_row {
+#luscofxaet .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2318,7 +2145,7 @@ summary(flanker_data)</code></pre>
   padding-right: 5px;
 }
 
-#mjspfnpiht .gt_first_grand_summary_row {
+#luscofxaet .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2328,11 +2155,11 @@ summary(flanker_data)</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#mjspfnpiht .gt_striped {
+#luscofxaet .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mjspfnpiht .gt_table_body {
+#luscofxaet .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2341,7 +2168,7 @@ summary(flanker_data)</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#mjspfnpiht .gt_footnotes {
+#luscofxaet .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2355,7 +2182,7 @@ summary(flanker_data)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#mjspfnpiht .gt_footnote {
+#luscofxaet .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -2364,7 +2191,7 @@ summary(flanker_data)</code></pre>
   padding-right: 5px;
 }
 
-#mjspfnpiht .gt_sourcenotes {
+#luscofxaet .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2378,7 +2205,7 @@ summary(flanker_data)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#mjspfnpiht .gt_sourcenote {
+#luscofxaet .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2386,64 +2213,64 @@ summary(flanker_data)</code></pre>
   padding-right: 5px;
 }
 
-#mjspfnpiht .gt_left {
+#luscofxaet .gt_left {
   text-align: left;
 }
 
-#mjspfnpiht .gt_center {
+#luscofxaet .gt_center {
   text-align: center;
 }
 
-#mjspfnpiht .gt_right {
+#luscofxaet .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mjspfnpiht .gt_font_normal {
+#luscofxaet .gt_font_normal {
   font-weight: normal;
 }
 
-#mjspfnpiht .gt_font_bold {
+#luscofxaet .gt_font_bold {
   font-weight: bold;
 }
 
-#mjspfnpiht .gt_font_italic {
+#luscofxaet .gt_font_italic {
   font-style: italic;
 }
 
-#mjspfnpiht .gt_super {
+#luscofxaet .gt_super {
   font-size: 65%;
 }
 
-#mjspfnpiht .gt_footnote_marks {
+#luscofxaet .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#mjspfnpiht .gt_asterisk {
+#luscofxaet .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mjspfnpiht .gt_indent_1 {
+#luscofxaet .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mjspfnpiht .gt_indent_2 {
+#luscofxaet .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mjspfnpiht .gt_indent_3 {
+#luscofxaet .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mjspfnpiht .gt_indent_4 {
+#luscofxaet .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mjspfnpiht .gt_indent_5 {
+#luscofxaet .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2635,13 +2462,12 @@ IQ
 </table>
 <pre class="r"><code>broom::tidy(flanker_data) #table for summary</code></pre>
 <pre><code>## # A tibble: 4 × 5
-##   term        estimate std.error statis…¹ p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
-## 1 (Intercept) 29.7        6.07      4.89  9.78e-6
-## 2 bilingual    1.00       1.71      0.587 5.60e-1
-## 3 age         -0.00945    0.0853   -0.111 9.12e-1
-## 4 IQ           0.120      0.0447    2.68  9.91e-3
-## # … with abbreviated variable name ¹​statistic</code></pre>
+##   term        estimate std.error statistic    p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+## 1 (Intercept) 29.7        6.07       4.89  0.00000978
+## 2 bilingual    1.00       1.71       0.587 0.560     
+## 3 age         -0.00945    0.0853    -0.111 0.912     
+## 4 IQ           0.120      0.0447     2.68  0.00991</code></pre>
 <pre class="r"><code>#Table for Flanker lm results
 tab_model(flanker_data,
           dv.labels = c(&quot;Flanker Task&quot;),
@@ -2774,30 +2600,24 @@ summary(backward_data)</code></pre>
 ## -3.5770 -1.1122  0.3912  1.3215  2.7331 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept) -1.10726    1.82251  -0.608  0.54608
-## bilingual    0.65011    0.51360   1.266  0.21112
-## age         -0.01712    0.02561  -0.668  0.50677
-## IQ           0.04361    0.01344   3.246  0.00203
-##               
-## (Intercept)   
-## bilingual     
-## age           
-## IQ          **
+##             Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept) -1.10726    1.82251  -0.608  0.54608   
+## bilingual    0.65011    0.51360   1.266  0.21112   
+## age         -0.01712    0.02561  -0.668  0.50677   
+## IQ           0.04361    0.01344   3.246  0.00203 **
 ## ---
-## Signif. codes:  
-## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 1.84 on 53 degrees of freedom
 ## Multiple R-squared:  0.1803, Adjusted R-squared:  0.1339 
 ## F-statistic: 3.886 on 3 and 53 DF,  p-value: 0.01387</code></pre>
 <pre class="r"><code>tbl_regression(backward_data, exponentiate = FALSE) #created table</code></pre>
-<div id="xtpzcpjugq" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ibprkutqbb" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#xtpzcpjugq .gt_table {
+#ibprkutqbb .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2822,7 +2642,7 @@ summary(backward_data)</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#xtpzcpjugq .gt_heading {
+#ibprkutqbb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2834,7 +2654,7 @@ summary(backward_data)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xtpzcpjugq .gt_title {
+#ibprkutqbb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2846,7 +2666,7 @@ summary(backward_data)</code></pre>
   border-bottom-width: 0;
 }
 
-#xtpzcpjugq .gt_subtitle {
+#ibprkutqbb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2858,13 +2678,13 @@ summary(backward_data)</code></pre>
   border-top-width: 0;
 }
 
-#xtpzcpjugq .gt_bottom_border {
+#ibprkutqbb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xtpzcpjugq .gt_col_headings {
+#ibprkutqbb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2879,7 +2699,7 @@ summary(backward_data)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xtpzcpjugq .gt_col_heading {
+#ibprkutqbb .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2899,7 +2719,7 @@ summary(backward_data)</code></pre>
   overflow-x: hidden;
 }
 
-#xtpzcpjugq .gt_column_spanner_outer {
+#ibprkutqbb .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2911,15 +2731,15 @@ summary(backward_data)</code></pre>
   padding-right: 4px;
 }
 
-#xtpzcpjugq .gt_column_spanner_outer:first-child {
+#ibprkutqbb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xtpzcpjugq .gt_column_spanner_outer:last-child {
+#ibprkutqbb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xtpzcpjugq .gt_column_spanner {
+#ibprkutqbb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2931,7 +2751,7 @@ summary(backward_data)</code></pre>
   width: 100%;
 }
 
-#xtpzcpjugq .gt_group_heading {
+#ibprkutqbb .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2956,7 +2776,7 @@ summary(backward_data)</code></pre>
   vertical-align: middle;
 }
 
-#xtpzcpjugq .gt_empty_group_heading {
+#ibprkutqbb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2971,15 +2791,15 @@ summary(backward_data)</code></pre>
   vertical-align: middle;
 }
 
-#xtpzcpjugq .gt_from_md > :first-child {
+#ibprkutqbb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xtpzcpjugq .gt_from_md > :last-child {
+#ibprkutqbb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xtpzcpjugq .gt_row {
+#ibprkutqbb .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2998,7 +2818,7 @@ summary(backward_data)</code></pre>
   overflow-x: hidden;
 }
 
-#xtpzcpjugq .gt_stub {
+#ibprkutqbb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3011,7 +2831,7 @@ summary(backward_data)</code></pre>
   padding-right: 5px;
 }
 
-#xtpzcpjugq .gt_stub_row_group {
+#ibprkutqbb .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3025,11 +2845,11 @@ summary(backward_data)</code></pre>
   vertical-align: top;
 }
 
-#xtpzcpjugq .gt_row_group_first td {
+#ibprkutqbb .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xtpzcpjugq .gt_summary_row {
+#ibprkutqbb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3039,16 +2859,16 @@ summary(backward_data)</code></pre>
   padding-right: 5px;
 }
 
-#xtpzcpjugq .gt_first_summary_row {
+#ibprkutqbb .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xtpzcpjugq .gt_first_summary_row.thick {
+#ibprkutqbb .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xtpzcpjugq .gt_last_summary_row {
+#ibprkutqbb .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3058,7 +2878,7 @@ summary(backward_data)</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#xtpzcpjugq .gt_grand_summary_row {
+#ibprkutqbb .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3068,7 +2888,7 @@ summary(backward_data)</code></pre>
   padding-right: 5px;
 }
 
-#xtpzcpjugq .gt_first_grand_summary_row {
+#ibprkutqbb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3078,11 +2898,11 @@ summary(backward_data)</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#xtpzcpjugq .gt_striped {
+#ibprkutqbb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xtpzcpjugq .gt_table_body {
+#ibprkutqbb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3091,7 +2911,7 @@ summary(backward_data)</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#xtpzcpjugq .gt_footnotes {
+#ibprkutqbb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3105,7 +2925,7 @@ summary(backward_data)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xtpzcpjugq .gt_footnote {
+#ibprkutqbb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -3114,7 +2934,7 @@ summary(backward_data)</code></pre>
   padding-right: 5px;
 }
 
-#xtpzcpjugq .gt_sourcenotes {
+#ibprkutqbb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3128,7 +2948,7 @@ summary(backward_data)</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#xtpzcpjugq .gt_sourcenote {
+#ibprkutqbb .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3136,64 +2956,64 @@ summary(backward_data)</code></pre>
   padding-right: 5px;
 }
 
-#xtpzcpjugq .gt_left {
+#ibprkutqbb .gt_left {
   text-align: left;
 }
 
-#xtpzcpjugq .gt_center {
+#ibprkutqbb .gt_center {
   text-align: center;
 }
 
-#xtpzcpjugq .gt_right {
+#ibprkutqbb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xtpzcpjugq .gt_font_normal {
+#ibprkutqbb .gt_font_normal {
   font-weight: normal;
 }
 
-#xtpzcpjugq .gt_font_bold {
+#ibprkutqbb .gt_font_bold {
   font-weight: bold;
 }
 
-#xtpzcpjugq .gt_font_italic {
+#ibprkutqbb .gt_font_italic {
   font-style: italic;
 }
 
-#xtpzcpjugq .gt_super {
+#ibprkutqbb .gt_super {
   font-size: 65%;
 }
 
-#xtpzcpjugq .gt_footnote_marks {
+#ibprkutqbb .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#xtpzcpjugq .gt_asterisk {
+#ibprkutqbb .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xtpzcpjugq .gt_indent_1 {
+#ibprkutqbb .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xtpzcpjugq .gt_indent_2 {
+#ibprkutqbb .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xtpzcpjugq .gt_indent_3 {
+#ibprkutqbb .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xtpzcpjugq .gt_indent_4 {
+#ibprkutqbb .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xtpzcpjugq .gt_indent_5 {
+#ibprkutqbb .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3740,296 +3560,180 @@ R<sup>2</sup> / R<sup>2</sup> adjusted
 <pre><code>## Warning: NAs introduced by coercion</code></pre>
 <pre class="r"><code>background_survey_1  &lt;- background_survey[1:57,] 
 background_survey_1</code></pre>
-<pre><code>##            X
-## 1      nvko1
-## 2      yrtb9
-## 3      ejpg7
-## 4      vvpq4
-## 5      cfug6
-## 6      oucx8
-## 7      ruvk3
-## 8      myyl9
-## 9      dhnz3
-## 10     bwat2
-## 11    ottj9 
-## 12     fjfm3
-## 13     buzt0
-## 14     wbje4
-## 15     wyks1
-## 16     tyfi7
-## 17     cbky9
-## 18     rdix8
-## 19     pqvt6
-## 20     iwzp1
-## 21     hqlv9
-## 22     mnwx7
-## 23     wldp0
-## 24     phww7
-## 25     bjfc1
-## 26     tlit0
-## 27     qeiy3
-## 28    onbv9 
-## 29     keta9
-## 30     kryd6
-## 31     qsry8
-## 32     jhoh9
-## 33     fgrl2
-## 34     fesx6
-## 35     adnm2
-## 36     vqpg1
-## 37 bi_zefa9 
-## 38  bi_dvyf7
-## 39  bi_evur7
-## 40  bi_xcix4
-## 41  bi_iizs0
-## 42  bi_igsy3
-## 43  bi_jdyf0
-## 44  bi_txmo8
-## 45  bi_wdfj3
-## 46  bi_sgmf1
-## 47  bi_giah0
-## 48  bi_ajli0
-## 49  bi_khem3
-## 50  bi_kxzm6
-## 51  bi_qjrz9
-## 52  bi_dckv1
-## 53  bi_rftj7
-## 54  bi_ycdf0
-## 55  bi_nxqq4
-## 56  bi_vpgq2
-## 57  bi_wetx1
-##    Please.enter.your.Prolific.ID...Participant.ID..or.full.name
-## 1                                      5ffc97615991d411f8ceff96
-## 2                                      5f22bdb732432502a2615f3f
-## 3                                      5fd4125ed9973916d62d9958
-## 4                                      5e483052a742a3000f7c15e8
-## 5                                               Krystle matias 
-## 6                                                         oucx8
-## 7                                      5d82d28977546f00166ae702
-## 8                                                         myyl9
-## 9                                                         dhnz3
-## 10                                     5621cf44ed6e5a000bc7efd1
-## 11                                                       ottj9 
-## 12                                     5c920f11be78b00001c82bf0
-## 13                                     5fd7c279955e160727234b05
-## 14                                     5a11f4d76924a60001eb7c1b
-## 15                                     5f5e33a37fa7566accb4e6ac
-## 16                                     605cd2aefa163d506547bb2d
-## 17                                     5a9adf93dbdb470001eee5e1
-## 18                                     60478deac07fa7000b0f2f2e
-## 19                                     5f919274b5383b00096b0295
-## 20                                     600ad0fb206b70059718a0c5
-## 21                                     5dc71b96d210e45213e92359
-## 22                                     6036b303c9b72d01f7d46a5f
-## 23                                     5d8cef3c28e183001a335ab0
-## 24                                     5bed3079fa1ac70001baa7ad
-## 25                                     5e4b78037799c5082e147d5e
-## 26                                     5f582a0071a90f3972ee9a09
-## 27                                     599a9252bbe848000179676e
-## 28                                                       onbv9 
-## 29                                     5d3587a13e11900001093ae8
-## 30                                     5cf806142780ca001a9d5cee
-## 31                                     5fa9392c0cc79c03b3f4eb58
-## 32                                     5fc63e053cf83c06341ac94a
-## 33                                     5fddf3f28ac1824a6fb56e29
-## 34                                     5f5f5013f947f6000bd8ddcb
-## 35                                     5ca73fe6bcdcc2001291822d
-## 36                                     5af85368f856320001cf6b09
-## 37                                                       zefa9 
-## 38                                                        dvyf7
-## 39                                                        evur7
-## 40                                                        xcix4
-## 41                                     5d287dfb531d0a0018e9251c
-## 42                                     5eb471789686d82c24661cb3
-## 43                                                        jdyf0
-## 44                                     5e695632d40a492070942196
-## 45                                     5e37fef4d8843b000aeb1b8f
-## 46                                     5c60e5371115b4000140fb07
-## 47                                     5c6e26630c45820001b851d3
-## 48                                                        ajli0
-## 49                                     5ec7d9910125920829519d00
-## 50                                                        kxzm6
-## 51                                     5fed41e3e14422f5e308c6e5
-## 52                                     5366a3f1fdf99b66dd29912c
-## 53                                     5c1d19c810677f0001d9d56c
-## 54                                     5d02c0e382e4f00001aa20cd
-## 55                                     6005f9ba9a21c96134362ff1
-## 56                                     5d4ba0be2fe36d00163e73db
-## 57                                     5de25e3fce20cd28846a7d5b
-##    X.1 Bilingual Gender      Residence Age
-## 1   NA         0      M            USA  22
-## 2   NA         0      F            USA  30
-## 3   NA         0      M            USA  32
-## 4   NA         0      F            USA  32
-## 5   NA         0      F            USA  34
-## 6   NA         0      M            USA  47
-## 7   NA         0      F            USA  35
-## 8   NA         0      F            USA  27
-## 9   NA         0      F            USA  22
-## 10  NA         0      M            USA  34
-## 11  NA         0      M            USA  38
-## 12  NA         0      F            USA  35
-## 13  NA         0      M         Mexico  30
-## 14  NA         0      F United Kingdom  40
-## 15  NA         0      F United Kingdom  37
-## 16  NA         0      F   South Africa  35
-## 17  NA         0      F United Kingdom  49
-## 18  NA         0      F   South Africa  38
-## 19  NA         0      F United Kingdom  29
-## 20  NA         0      M   South Africa  42
-## 21  NA         0      M United Kingdom  43
-## 22  NA         0      M          Spain  27
-## 23  NA         0      F United Kingdom  32
-## 24  NA         0      M United Kingdom  42
-## 25  NA         0      F United Kingdom  40
-## 26  NA         0      M United Kingdom  47
-## 27  NA         0      F United Kingdom  56
-## 28  NA         0      F            USA  50
-## 29  NA         0      F United Kingdom  27
-## 30  NA         0      F United Kingdom  55
-## 31  NA         0      F United Kingdom  46
-## 32  NA         0      F United Kingdom  48
-## 33  NA         0      M United Kingdom  54
-## 34  NA         0      F          Spain  33
-## 35  NA         0      F United Kingdom  36
-## 36  NA         0      F United Kingdom  44
-## 37  NA         1      F            USA  43
-## 38  NA         1      F            USA  58
-## 39  NA         1      F            USA  42
-## 40  NA         1      F            USA  50
-## 41  NA         1      F          Spain  25
-## 42  NA         1      M         Mexico  50
-## 43  NA         1      M            USA  34
-## 44  NA         1      F United Kingdom  51
-## 45  NA         1      F    Netherlands  31
-## 46  NA         1      M         Mexico  46
-## 47  NA         1      M         Mexico  23
-## 48  NA         1      F            USA  35
-## 49  NA         1      F            USA  26
-## 50  NA         1      F            USA  27
-## 51  NA         1      M            USA  43
-## 52  NA         1      M United Kingdom  30
-## 53  NA         1      M         Mexico  44
-## 54  NA         1      F United Kingdom  50
-## 55  NA         1      F United Kingdom  56
-## 56  NA         1      M         Mexico  33
-## 57  NA         1      M United Kingdom  49
-##                    Ethnicity     Teaching_Level
-## 1         White or Caucasian         9-12 grade
-## 2         White or Caucasian         6-8 grades
-## 3  Asian or Pacific Islander         9-12 grade
-## 4         White or Caucasian         9-12 grade
-## 5         White or Caucasian         2nd  grade
-## 6         Hispanic or Latino         9-12 grade
-## 7  Asian or Pacific Islander College/University
-## 8         White or Caucasian       Kindergarten
-## 9         Hispanic or Latino       Kindergarten
-## 10        White or Caucasian College/University
-## 11   Multiracial or Biracial       Kindergarten
-## 12        White or Caucasian       Kindergarten
-## 13        Hispanic or Latino College/University
-## 14        White or Caucasian          5th grade
-## 15        White or Caucasian         9-12 grade
-## 16   Multiracial or Biracial         grade 0-12
-## 17        White or Caucasian College/University
-## 18 Black or African American College/University
-## 19                   turkish College/University
-## 20 Black or African American College/University
-## 21        White or Caucasian         6-8 grades
-## 22 Asian or Pacific Islander College/University
-## 23        White or Caucasian          3rd grade
-## 24        White or Caucasian College/University
-## 25 Black or African American         9-12 grade
-## 26        White or Caucasian College/University
-## 27        White or Caucasian         9-12 grade
-## 28        Hispanic or Latino       Kindergarten
-## 29        White or Caucasian College/University
-## 30        White or Caucasian College/University
-## 31        White or Caucasian College/University
-## 32        White or Caucasian          1st grade
-## 33        White or Caucasian         9-12 grade
-## 34        White or Caucasian         6-8 grades
-## 35        White or Caucasian          4th grade
-## 36        White or Caucasian         9-12 grade
-## 37 Asian or Pacific Islander         9-12 grade
-## 38        White or Caucasian         6-8 grades
-## 39        Hispanic or Latino         6-8 grades
-## 40        Hispanic or Latino         9-12 grade
-## 41        White or Caucasian         6-8 grades
-## 42        Hispanic or Latino          4th grade
-## 43        White or Caucasian College/University
-## 44        White or Caucasian          3rd grade
-## 45        White or Caucasian         6-8 grades
-## 46        White or Caucasian         6-8 grades
-## 47        Hispanic or Latino College/University
-## 48        Hispanic or Latino       Kindergarten
-## 49        Hispanic or Latino         9-12 grade
-## 50        Hispanic or Latino         9-12 grade
-## 51        White or Caucasian         9-12 grade
-## 52        White or Caucasian         2nd  grade
-## 53        Hispanic or Latino         9-12 grade
-## 54        White or Caucasian         9-12 grade
-## 55        White or Caucasian         9-12 grade
-## 56        Hispanic or Latino          4th grade
-## 57        White or Caucasian          5th grade
-##     Experience                   Languages
-## 1    1-3 years                        &lt;NA&gt;
-## 2   7-10 years                        &lt;NA&gt;
-## 3    4-6 years                        &lt;NA&gt;
-## 4   7-10 years                        &lt;NA&gt;
-## 5    4-6 years                        &lt;NA&gt;
-## 6    16+ years                        &lt;NA&gt;
-## 7   7-10 years                        &lt;NA&gt;
-## 8    4-6 years                        &lt;NA&gt;
-## 9    1-3 years                        &lt;NA&gt;
-## 10   4-6 years                        &lt;NA&gt;
-## 11  7-10 years                        &lt;NA&gt;
-## 12   1-3 years                        &lt;NA&gt;
-## 13   4-6 years                        &lt;NA&gt;
-## 14   16+ years                        &lt;NA&gt;
-## 15 11-15 years                        &lt;NA&gt;
-## 16   4-6 years                        &lt;NA&gt;
-## 17   16+ years                        &lt;NA&gt;
-## 18  7-10 years                        &lt;NA&gt;
-## 19   4-6 years                        &lt;NA&gt;
-## 20 11-15 years                        &lt;NA&gt;
-## 21 11-15 years                        &lt;NA&gt;
-## 22   1-3 years                        &lt;NA&gt;
-## 23  7-10 years                        &lt;NA&gt;
-## 24 11-15 years                        &lt;NA&gt;
-## 25   16+ years                        &lt;NA&gt;
-## 26   1-3 years                        &lt;NA&gt;
-## 27   16+ years                        &lt;NA&gt;
-## 28   16+ years                        &lt;NA&gt;
-## 29   1-3 years                        &lt;NA&gt;
-## 30   16+ years                        &lt;NA&gt;
-## 31   16+ years                        &lt;NA&gt;
-## 32  7-10 years                        &lt;NA&gt;
-## 33   16+ years                        &lt;NA&gt;
-## 34 11-15 years                        &lt;NA&gt;
-## 35   4-6 years                        &lt;NA&gt;
-## 36   16+ years                        &lt;NA&gt;
-## 37   16+ years                    Mandarin
-## 38  7-10 years                     Spanish
-## 39   4-6 years                     Spanish
-## 40  7-10 years                     Spanish
-## 41   1-3 years Spanish, Basque and English
-## 42   16+ years                     Spanish
-## 43   4-6 years                     Spanish
-## 44   16+ years                      French
-## 45  7-10 years                     English
-## 46   16+ years                     English
-## 47   4-6 years                     English
-## 48  7-10 years                     Spanish
-## 49   1-3 years                     Spanish
-## 50   4-6 years                     Spanish
-## 51   16+ years                     Spanish
-## 52  7-10 years                      French
-## 53 11-15 years                     Spanish
-## 54   16+ years                      French
-## 55   16+ years                      French
-## 56   1-3 years                     English
-## 57 11-15 years                      German</code></pre>
+<pre><code>##            X Please.enter.your.Prolific.ID...Participant.ID..or.full.name X.1
+## 1      nvko1                                     5ffc97615991d411f8ceff96  NA
+## 2      yrtb9                                     5f22bdb732432502a2615f3f  NA
+## 3      ejpg7                                     5fd4125ed9973916d62d9958  NA
+## 4      vvpq4                                     5e483052a742a3000f7c15e8  NA
+## 5      cfug6                                              Krystle matias   NA
+## 6      oucx8                                                        oucx8  NA
+## 7      ruvk3                                     5d82d28977546f00166ae702  NA
+## 8      myyl9                                                        myyl9  NA
+## 9      dhnz3                                                        dhnz3  NA
+## 10     bwat2                                     5621cf44ed6e5a000bc7efd1  NA
+## 11    ottj9                                                        ottj9   NA
+## 12     fjfm3                                     5c920f11be78b00001c82bf0  NA
+## 13     buzt0                                     5fd7c279955e160727234b05  NA
+## 14     wbje4                                     5a11f4d76924a60001eb7c1b  NA
+## 15     wyks1                                     5f5e33a37fa7566accb4e6ac  NA
+## 16     tyfi7                                     605cd2aefa163d506547bb2d  NA
+## 17     cbky9                                     5a9adf93dbdb470001eee5e1  NA
+## 18     rdix8                                     60478deac07fa7000b0f2f2e  NA
+## 19     pqvt6                                     5f919274b5383b00096b0295  NA
+## 20     iwzp1                                     600ad0fb206b70059718a0c5  NA
+## 21     hqlv9                                     5dc71b96d210e45213e92359  NA
+## 22     mnwx7                                     6036b303c9b72d01f7d46a5f  NA
+## 23     wldp0                                     5d8cef3c28e183001a335ab0  NA
+## 24     phww7                                     5bed3079fa1ac70001baa7ad  NA
+## 25     bjfc1                                     5e4b78037799c5082e147d5e  NA
+## 26     tlit0                                     5f582a0071a90f3972ee9a09  NA
+## 27     qeiy3                                     599a9252bbe848000179676e  NA
+## 28    onbv9                                                        onbv9   NA
+## 29     keta9                                     5d3587a13e11900001093ae8  NA
+## 30     kryd6                                     5cf806142780ca001a9d5cee  NA
+## 31     qsry8                                     5fa9392c0cc79c03b3f4eb58  NA
+## 32     jhoh9                                     5fc63e053cf83c06341ac94a  NA
+## 33     fgrl2                                     5fddf3f28ac1824a6fb56e29  NA
+## 34     fesx6                                     5f5f5013f947f6000bd8ddcb  NA
+## 35     adnm2                                     5ca73fe6bcdcc2001291822d  NA
+## 36     vqpg1                                     5af85368f856320001cf6b09  NA
+## 37 bi_zefa9                                                        zefa9   NA
+## 38  bi_dvyf7                                                        dvyf7  NA
+## 39  bi_evur7                                                        evur7  NA
+## 40  bi_xcix4                                                        xcix4  NA
+## 41  bi_iizs0                                     5d287dfb531d0a0018e9251c  NA
+## 42  bi_igsy3                                     5eb471789686d82c24661cb3  NA
+## 43  bi_jdyf0                                                        jdyf0  NA
+## 44  bi_txmo8                                     5e695632d40a492070942196  NA
+## 45  bi_wdfj3                                     5e37fef4d8843b000aeb1b8f  NA
+## 46  bi_sgmf1                                     5c60e5371115b4000140fb07  NA
+## 47  bi_giah0                                     5c6e26630c45820001b851d3  NA
+## 48  bi_ajli0                                                        ajli0  NA
+## 49  bi_khem3                                     5ec7d9910125920829519d00  NA
+## 50  bi_kxzm6                                                        kxzm6  NA
+## 51  bi_qjrz9                                     5fed41e3e14422f5e308c6e5  NA
+## 52  bi_dckv1                                     5366a3f1fdf99b66dd29912c  NA
+## 53  bi_rftj7                                     5c1d19c810677f0001d9d56c  NA
+## 54  bi_ycdf0                                     5d02c0e382e4f00001aa20cd  NA
+## 55  bi_nxqq4                                     6005f9ba9a21c96134362ff1  NA
+## 56  bi_vpgq2                                     5d4ba0be2fe36d00163e73db  NA
+## 57  bi_wetx1                                     5de25e3fce20cd28846a7d5b  NA
+##    Bilingual Gender      Residence Age                 Ethnicity
+## 1          0      M            USA  22        White or Caucasian
+## 2          0      F            USA  30        White or Caucasian
+## 3          0      M            USA  32 Asian or Pacific Islander
+## 4          0      F            USA  32        White or Caucasian
+## 5          0      F            USA  34        White or Caucasian
+## 6          0      M            USA  47        Hispanic or Latino
+## 7          0      F            USA  35 Asian or Pacific Islander
+## 8          0      F            USA  27        White or Caucasian
+## 9          0      F            USA  22        Hispanic or Latino
+## 10         0      M            USA  34        White or Caucasian
+## 11         0      M            USA  38   Multiracial or Biracial
+## 12         0      F            USA  35        White or Caucasian
+## 13         0      M         Mexico  30        Hispanic or Latino
+## 14         0      F United Kingdom  40        White or Caucasian
+## 15         0      F United Kingdom  37        White or Caucasian
+## 16         0      F   South Africa  35   Multiracial or Biracial
+## 17         0      F United Kingdom  49        White or Caucasian
+## 18         0      F   South Africa  38 Black or African American
+## 19         0      F United Kingdom  29                   turkish
+## 20         0      M   South Africa  42 Black or African American
+## 21         0      M United Kingdom  43        White or Caucasian
+## 22         0      M          Spain  27 Asian or Pacific Islander
+## 23         0      F United Kingdom  32        White or Caucasian
+## 24         0      M United Kingdom  42        White or Caucasian
+## 25         0      F United Kingdom  40 Black or African American
+## 26         0      M United Kingdom  47        White or Caucasian
+## 27         0      F United Kingdom  56        White or Caucasian
+## 28         0      F            USA  50        Hispanic or Latino
+## 29         0      F United Kingdom  27        White or Caucasian
+## 30         0      F United Kingdom  55        White or Caucasian
+## 31         0      F United Kingdom  46        White or Caucasian
+## 32         0      F United Kingdom  48        White or Caucasian
+## 33         0      M United Kingdom  54        White or Caucasian
+## 34         0      F          Spain  33        White or Caucasian
+## 35         0      F United Kingdom  36        White or Caucasian
+## 36         0      F United Kingdom  44        White or Caucasian
+## 37         1      F            USA  43 Asian or Pacific Islander
+## 38         1      F            USA  58        White or Caucasian
+## 39         1      F            USA  42        Hispanic or Latino
+## 40         1      F            USA  50        Hispanic or Latino
+## 41         1      F          Spain  25        White or Caucasian
+## 42         1      M         Mexico  50        Hispanic or Latino
+## 43         1      M            USA  34        White or Caucasian
+## 44         1      F United Kingdom  51        White or Caucasian
+## 45         1      F    Netherlands  31        White or Caucasian
+## 46         1      M         Mexico  46        White or Caucasian
+## 47         1      M         Mexico  23        Hispanic or Latino
+## 48         1      F            USA  35        Hispanic or Latino
+## 49         1      F            USA  26        Hispanic or Latino
+## 50         1      F            USA  27        Hispanic or Latino
+## 51         1      M            USA  43        White or Caucasian
+## 52         1      M United Kingdom  30        White or Caucasian
+## 53         1      M         Mexico  44        Hispanic or Latino
+## 54         1      F United Kingdom  50        White or Caucasian
+## 55         1      F United Kingdom  56        White or Caucasian
+## 56         1      M         Mexico  33        Hispanic or Latino
+## 57         1      M United Kingdom  49        White or Caucasian
+##        Teaching_Level  Experience                   Languages
+## 1          9-12 grade   1-3 years                        &lt;NA&gt;
+## 2          6-8 grades  7-10 years                        &lt;NA&gt;
+## 3          9-12 grade   4-6 years                        &lt;NA&gt;
+## 4          9-12 grade  7-10 years                        &lt;NA&gt;
+## 5          2nd  grade   4-6 years                        &lt;NA&gt;
+## 6          9-12 grade   16+ years                        &lt;NA&gt;
+## 7  College/University  7-10 years                        &lt;NA&gt;
+## 8        Kindergarten   4-6 years                        &lt;NA&gt;
+## 9        Kindergarten   1-3 years                        &lt;NA&gt;
+## 10 College/University   4-6 years                        &lt;NA&gt;
+## 11       Kindergarten  7-10 years                        &lt;NA&gt;
+## 12       Kindergarten   1-3 years                        &lt;NA&gt;
+## 13 College/University   4-6 years                        &lt;NA&gt;
+## 14          5th grade   16+ years                        &lt;NA&gt;
+## 15         9-12 grade 11-15 years                        &lt;NA&gt;
+## 16         grade 0-12   4-6 years                        &lt;NA&gt;
+## 17 College/University   16+ years                        &lt;NA&gt;
+## 18 College/University  7-10 years                        &lt;NA&gt;
+## 19 College/University   4-6 years                        &lt;NA&gt;
+## 20 College/University 11-15 years                        &lt;NA&gt;
+## 21         6-8 grades 11-15 years                        &lt;NA&gt;
+## 22 College/University   1-3 years                        &lt;NA&gt;
+## 23          3rd grade  7-10 years                        &lt;NA&gt;
+## 24 College/University 11-15 years                        &lt;NA&gt;
+## 25         9-12 grade   16+ years                        &lt;NA&gt;
+## 26 College/University   1-3 years                        &lt;NA&gt;
+## 27         9-12 grade   16+ years                        &lt;NA&gt;
+## 28       Kindergarten   16+ years                        &lt;NA&gt;
+## 29 College/University   1-3 years                        &lt;NA&gt;
+## 30 College/University   16+ years                        &lt;NA&gt;
+## 31 College/University   16+ years                        &lt;NA&gt;
+## 32          1st grade  7-10 years                        &lt;NA&gt;
+## 33         9-12 grade   16+ years                        &lt;NA&gt;
+## 34         6-8 grades 11-15 years                        &lt;NA&gt;
+## 35          4th grade   4-6 years                        &lt;NA&gt;
+## 36         9-12 grade   16+ years                        &lt;NA&gt;
+## 37         9-12 grade   16+ years                    Mandarin
+## 38         6-8 grades  7-10 years                     Spanish
+## 39         6-8 grades   4-6 years                     Spanish
+## 40         9-12 grade  7-10 years                     Spanish
+## 41         6-8 grades   1-3 years Spanish, Basque and English
+## 42          4th grade   16+ years                     Spanish
+## 43 College/University   4-6 years                     Spanish
+## 44          3rd grade   16+ years                      French
+## 45         6-8 grades  7-10 years                     English
+## 46         6-8 grades   16+ years                     English
+## 47 College/University   4-6 years                     English
+## 48       Kindergarten  7-10 years                     Spanish
+## 49         9-12 grade   1-3 years                     Spanish
+## 50         9-12 grade   4-6 years                     Spanish
+## 51         9-12 grade   16+ years                     Spanish
+## 52         2nd  grade  7-10 years                      French
+## 53         9-12 grade 11-15 years                     Spanish
+## 54         9-12 grade   16+ years                      French
+## 55         9-12 grade   16+ years                      French
+## 56          4th grade   1-3 years                     English
+## 57          5th grade 11-15 years                      German</code></pre>
 <pre class="r"><code>library(table1)</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;table1&#39;</code></pre>
@@ -4438,18 +4142,17 @@ plot(flanker_correct ~ age + IQ, data = new_language, pch=16)</code></pre>
 <pre class="r"><code>#linear model
 flanker_model_language &lt;- lm(flanker_correct ~ age + IQ, data = new_language)
 abline(flanker_model_language)</code></pre>
-<pre><code>## Warning in abline(flanker_model_language): only
-## using the first two of 3 regression coefficients</code></pre>
+<pre><code>## Warning in abline(flanker_model_language): only using the first two of 3
+## regression coefficients</code></pre>
 <p><img src="qp_updated_files/figure-html/unnamed-chunk-23-2.png" width="672" /></p>
 <pre class="r"><code>my_results &lt;- tidy(flanker_model_language)
 my_results</code></pre>
 <pre><code>## # A tibble: 3 × 5
-##   term        estimate std.error statis…¹ p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
-## 1 (Intercept)   21.2      13.8       1.54  0.141 
-## 2 age           -0.155     0.142    -1.09  0.290 
-## 3 IQ             0.266     0.131     2.03  0.0573
-## # … with abbreviated variable name ¹​statistic</code></pre>
+##   term        estimate std.error statistic p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 (Intercept)   21.2      13.8        1.54  0.141 
+## 2 age           -0.155     0.142     -1.09  0.290 
+## 3 IQ             0.266     0.131      2.03  0.0573</code></pre>
 <pre class="r"><code>flanker_model_language</code></pre>
 <pre><code>## 
 ## Call:
@@ -4468,17 +4171,12 @@ my_results</code></pre>
 ## -16.7273  -0.7667   2.4163   3.6353   6.0239 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept)  21.2068    13.7539   1.542   0.1405
-## age          -0.1552     0.1423  -1.090   0.2899
-## IQ            0.2660     0.1310   2.031   0.0573
-##              
-## (Intercept)  
-## age          
-## IQ          .
+##             Estimate Std. Error t value Pr(&gt;|t|)  
+## (Intercept)  21.2068    13.7539   1.542   0.1405  
+## age          -0.1552     0.1423  -1.090   0.2899  
+## IQ            0.2660     0.1310   2.031   0.0573 .
 ## ---
-## Signif. codes:  
-## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 6.693 on 18 degrees of freedom
 ##   (1 observation deleted due to missingness)
@@ -4506,12 +4204,11 @@ par(mfrow = c(2,2))</code></pre>
 <pre class="r"><code>my_results &lt;- tidy(stroop_model_language)
 my_results</code></pre>
 <pre><code>## # A tibble: 3 × 5
-##   term        estimate std.error statis…¹ p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
-## 1 (Intercept)  22.2       4.87       4.55 2.50e-4
-## 2 age          -0.0590    0.0504    -1.17 2.57e-1
-## 3 IQ            0.171     0.0464     3.69 1.69e-3
-## # … with abbreviated variable name ¹​statistic</code></pre>
+##   term        estimate std.error statistic  p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)  22.2       4.87        4.55 0.000250
+## 2 age          -0.0590    0.0504     -1.17 0.257   
+## 3 IQ            0.171     0.0464      3.69 0.00169</code></pre>
 <pre class="r"><code>stroop_model_language</code></pre>
 <pre><code>## 
 ## Call:
@@ -4530,17 +4227,12 @@ my_results</code></pre>
 ## -5.4736 -1.1456 -0.2982  1.4977  4.4921 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)
-## (Intercept) 22.15387    4.87196   4.547  0.00025
-## age         -0.05899    0.05041  -1.170  0.25715
-## IQ           0.17098    0.04639   3.686  0.00169
-##                
-## (Intercept) ***
-## age            
-## IQ          ** 
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 22.15387    4.87196   4.547  0.00025 ***
+## age         -0.05899    0.05041  -1.170  0.25715    
+## IQ           0.17098    0.04639   3.686  0.00169 ** 
 ## ---
-## Signif. codes:  
-## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 2.371 on 18 degrees of freedom
 ##   (1 observation deleted due to missingness)
