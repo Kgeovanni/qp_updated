@@ -1,0 +1,591 @@
+---
+title: "QP Data Analysis"
+author: "Diana Sanchez"
+date: "August 2022"
+output: html_document
+---
+
+
+rm(list = ls(all.names = TRUE)) #clear R environment
+
+
+# Load libraries
+```{r message=FALSE, warning=FALSE}
+library(readr)
+library(ggplot2)
+library(GGally)
+library(speakr)
+library(dplyr)
+library(tidyverse)
+library(readr)
+library(plyr)
+library(stringi)
+library(purrr)
+library(broom)
+library(scatterplot3d)
+library(kableExtra)
+
+library(tidyr)
+library(readr)
+library(readxl)
+
+# get summary table for lm results
+library(gtsummary)
+library(finalfit) # works with plyr
+library(jtools)
+library(texreg)
+library(kableExtra)
+library(sjPlot)
+library(sjmisc)
+library(sjlabelled)
+library(stargazer)
+```
+
+
+# Loading raw data for experiment tasks 
+Loading .txt data anc converting .cvs to df
+
+## Loading raw data for backward
+```{r}
+setwd("~/Desktop/RStudio_QP/experiment_rawdata")
+
+#Load backward raw data
+all_backward <- file.path("~/Desktop/RStudio_QP/experiment_rawdata/Backward") 
+#Create list files
+backward_file_names <- list.files(all_backward, pattern = ".txt", full.names = TRUE) 
+#turns list to list object (output)
+backward_data <- lapply(backward_file_names, read.table)
+#change file names
+names(backward_data) <- stri_sub(backward_file_names, -9, -5)
+
+#backward_data    #use this to read df
+
+#data frame
+backward_df <- do.call("rbind", backward_data)
+#converts values to string
+str(backward_df)
+
+backward_df <- tibble::rownames_to_column(backward_df, "row_name")
+colnames(backward_df) <- c("participant_observationNum","highest_corsi","Number_of_items","backward_result","table_row")
+
+#saving df
+write.csv(backward_df,"~/Desktop/RStudio_QP/experiment_rawdata/all_backward.csv")
+```
+
+## Loading raw data for flanker
+```{r}
+setwd("~/Desktop/RStudio_QP/experiment_rawdata")
+
+#Load backward raw data
+all_flanker <- file.path("~/Desktop/RStudio_QP/experiment_rawdata/Flanker") 
+#Create list files
+flanker_file_names <- list.files(all_flanker, pattern = ".txt", full.names = TRUE) 
+#turns list to list object (output)
+flanker_data <- lapply(flanker_file_names, read.table)
+
+#change file names
+names(flanker_data) <- stri_sub(flanker_file_names, -9, -5)
+
+
+#flanker_data       #use this only to read df
+
+#data frame
+flanker_df <- do.call("rbind", flanker_data)
+
+str(flanker_df)
+
+flanker_df <- tibble::rownames_to_column(flanker_df, "row_name")
+colnames(flanker_df) <- c("participant_observationNum","stimulus", "congruent","flanker_result","response_time")
+
+#saving df
+write.csv(flanker_df,"~/Desktop/RStudio_QP/experiment_rawdata/all_flanker.csv")
+```
+
+## Loading raw data for stroop
+```{r}
+setwd("~/Desktop/RStudio_QP/experiment_rawdata")
+
+#Load backward raw data
+all_stroop <- file.path("~/Desktop/RStudio_QP/experiment_rawdata/Stroop") 
+#Create list files
+stroop_file_names <- list.files(all_stroop, pattern = ".txt", full.names = TRUE) 
+#turns list to list object (output)
+stroop_data <- lapply(stroop_file_names, read.table)
+
+#change file names
+names(stroop_data) <- stri_sub(stroop_file_names, -9, -5)
+
+#stroop_data        #use this only to read df
+
+#data frame
+stroop_df <- do.call("rbind", stroop_data)
+
+str(stroop_df)
+
+stroop_df <- tibble::rownames_to_column(stroop_df, "row_name")
+colnames(stroop_df) <- c("participant_observationNum","stimulus", "word_name","word_color","stroop_match", "row_number","key_pressed", "stroop_result", "response_time")
+
+#saving df
+write.csv(stroop_df,"~/Desktop/RStudio_QP/experiment_rawdata/all_stroop.csv")
+```
+
+
+
+
+#Analysis of all_data 
+## Tidy all_data
+all_data df includes all 58 participants, two groups. Only total correct responses are included for each experimental task (flanker, stroop, backward).
+```{r}
+#Load working data
+all_data <- read.csv("~/Desktop/RStudio_QP/experiment_data/all_data.csv", header = TRUE) 
+
+#summary
+summary(all_data)
+
+
+#adding "bilingual"column to data set (all_data)
+all_data$bilingual = c(rep(0,36),rep(1,22)) # 0=nonLanguage, 1=language
+
+
+#separate groups: nonLanguage teachers and language teachers
+nonLanguage <- all_data[1:36, ]
+language <- all_data[37:58, ]
+
+nonLanguage$language = "NonLanguage"
+language$language = "Language"
+
+#adding column to indicate nonLanguage or language for each participant
+all_data = bind_rows(nonLanguage,language)
+```
+
+
+
+##Analysis of each experiment + group+age+IQ
+```{r}
+stroop_data = lm(stroop_correct ~ bilingual+age+IQ, data=all_data)
+summary(stroop_data)
+```
+
+```{r}
+flanker_data = lm(flanker_correct ~ bilingual+age+IQ, data=all_data)
+summary(flanker_data)
+```
+
+```{r}
+backward_data = lm(backward_correct ~ bilingual+age+IQ, data=all_data)
+summary(backward_data)
+```
+
+
+# Analsyis by groups
+Data Analysis for nonLanguage Group
+The nonLanguage group consist of the teachers who only use one language in their professional work setting.
+
+## Linear regression model for nonLanguage BACKWARD task
+```{r}
+data(nonLanguage)
+head(nonLanguage)
+
+##plot
+plot(backward_correct ~ age + IQ, data = nonLanguage, pch=16)
+
+#linear model
+backward_model_nonLanguage <- lm(backward_correct ~ age + IQ, data = nonLanguage)
+#abline(backward_model_nonLanguage)
+
+my_results <- tidy(backward_model_nonLanguage)
+my_results
+backward_model_nonLanguage
+
+summary(backward_model_nonLanguage)
+
+par(mfrow = c(2,2)) 
+plot(backward_model_nonLanguage) 
+
+AIC(backward_model_nonLanguage)
+BIC(backward_model_nonLanguage)
+
+###
+test2 = lm(backward_correct ~ bilingual+age+IQ, data=all_data)
+summary(test2)
+
+```
+
+## Linear regression model for nonLanguage FLANKER task
+```{r}
+data(nonLanguage)
+head(nonLanguage)
+
+##plot
+plot(flanker_correct ~ age + IQ, data = nonLanguage, pch=16)
+
+#linear model
+flanker_model_nonLanguage <- lm(flanker_correct ~ age + IQ, data = nonLanguage)
+#abline(flanker_model_nonLanguage)
+
+my_results <- tidy(flanker_model_nonLanguage)
+my_results
+flanker_model_nonLanguage
+
+
+summary(flanker_model_nonLanguage)
+
+par(mfrow = c(2,2)) 
+plot(flanker_model_nonLanguage) 
+
+AIC(flanker_model_nonLanguage)
+BIC(flanker_model_nonLanguage)
+
+#comparing language and nonLanguage groups for flanker_correct
+test = lm(flanker_correct ~ bilingual+age+IQ, data=all_data)
+summary(test)
+
+```
+
+## Linear regression model for nonLanguage STROOP task
+```{r}
+data(nonLanguage)
+head(nonLanguage)
+
+##plot
+plot(stroop_correct ~ age + IQ, data = nonLanguage, pch=16)
+
+#linear model
+stroop_model_nonLanguage <- lm(stroop_correct ~ age + IQ, data = nonLanguage)
+abline(stroop_model_nonLanguage)
+
+my_results <- tidy(stroop_model_nonLanguage)
+my_results
+stroop_model_nonLanguage
+
+summary(stroop_model_nonLanguage)
+
+par(mfrow = c(2,2)) 
+plot(stroop_model_nonLanguage) 
+
+AIC(stroop_model_nonLanguage)
+BIC(stroop_model_nonLanguage)
+
+
+test3 = lm(stroop_correct ~ bilingual+age+IQ, data=all_data)
+summary(test3)
+```
+
+
+# Data Analysis for Language Group {.tabset}
+The language group consist of the teachers who use more than one language in their professional work setting.
+
+## Linear regression model for language BACKWARD
+```{r}
+data(language)
+head(language)
+
+#plot Language
+plot(backward_correct ~ age + IQ, data = language, pch=16)
+
+#linear model
+backward_model_language <- lm(backward_correct ~ age + IQ, data = language)
+abline(backward_model_language)
+
+my_results <- tidy(backward_model_language)
+my_results
+backward_model_language
+
+summary(backward_model_language)
+
+par(mfrow = c(2,2)) 
+plot(backward_model_language) 
+
+AIC(backward_model_language)
+BIC(backward_model_language)
+```
+
+## Linear regression model for language FLANKER
+```{r}
+data(language)
+head(language)
+
+#plot Language
+plot(flanker_correct ~ age + IQ, data = language, pch=16)
+
+#linear model
+flanker_model_language <- lm(flanker_correct ~ age + IQ, data = language)
+abline(flanker_model_language)
+
+my_results <- tidy(flanker_model_language)
+my_results
+flanker_model_language
+
+summary(flanker_model_language)
+
+par(mfrow = c(2,2)) 
+plot(flanker_model_language) 
+
+AIC(flanker_model_language)
+BIC(flanker_model_language)
+```
+
+## Linear regression model for language STROOP
+```{r}
+data(language)
+head(language)
+
+#plot Language
+par(mfrow = c(2,2))
+plot(stroop_correct ~ age + IQ, data = language, pch=16)
+
+#linear model
+stroop_model_language <- lm(stroop_correct ~ age + IQ, data = language)
+
+par(mfrow = c(2,2))
+plot(stroop_model_language)
+
+my_results <- tidy(stroop_model_language)
+my_results
+stroop_model_language
+
+summary(stroop_model_language)
+
+par(mfrow = c(2,2)) 
+plot(stroop_model_language) 
+
+AIC(stroop_model_language)
+BIC(stroop_model_language)
+```
+
+
+#ADDITIONAL ANALYSIS
+
+## Histogram to observe results
+```{r}
+attach(all_data) #using objects in df all_data
+hist(backward_correct) #this could be considered "normal"
+hist(flanker_correct) #not normal
+hist(stroop_correct) #not normal
+
+summary(all_data)
+```
+
+
+
+
+#-------------------------------------------------------------------------#
+
+## Removing 1 data (45) which is considered an outlier. 
+
+```{r}
+#created new data with deleted row 45
+new_all_data <- all_data[-c(45),]
+
+#created new language group (-45)
+new_language <- new_all_data[37:58, ]
+
+summary(new_all_data)
+```
+
+# Linear regression for Stroop
+```{r}
+#Data analysis of 3 tasks and groups with "new_all_data" df
+stroop_data = lm(stroop_correct ~ bilingual+age+IQ, data=new_all_data)
+summary(stroop_data)
+
+#table for summary results
+tbl_regression(stroop_data, exponentiate = FALSE) #created table
+summ(stroop_data, scale = FALSE) #another table
+broom::tidy(stroop_data) #table for summary
+
+#Table for Stroop lm results
+tab_model(stroop_data,
+          dv.labels = c("Stroop Task"),
+          string.pred = "Coefficient",
+          string.p ="P-Value")#printed table for summary
+
+
+#plot IQ
+ggplot(new_all_data, aes(x =IQ, y = stroop_correct, color = language)) +
+  geom_point() +
+   scale_fill_discrete(labels = c('Languages','One Language')) +
+  guides(colour = guide_legend(title = "Teachers")) +
+labs(title = "Stroop Task Performance", y= "Correct Trials", x= "Intelligence Quotient") +
+  theme(plot.title=element_text(hjust=0.5))
+ 
+#plot age
+ggplot(new_all_data, aes(x =age, y = stroop_correct, color = language)) +
+  geom_point() +
+   scale_fill_discrete(labels = c('Languages','One Language')) +
+  guides(colour = guide_legend(title = "Teachers")) +
+labs(title = "Stroop Task Performance", y= "Correct Trials", x= "Age") +
+  theme(plot.title=element_text(hjust=0.5))
+
+##Assumptions of Linear Regression *Keys: 1, 2, 3, 4, 5. Ex. plot(stroop_data, 5)
+par(mfrow = c(2,2))
+plot(stroop_data)
+```
+
+```{r}
+
+flanker_data = lm(flanker_correct ~ bilingual+age+IQ, data=new_all_data)
+summary(flanker_data)
+
+tbl_regression(flanker_data, exponentiate = FALSE,) #created table
+summ(flanker_data, scale = FALSE) #another table
+broom::tidy(flanker_data) #table for summary
+
+
+#Table for Flanker lm results
+tab_model(flanker_data,
+          dv.labels = c("Flanker Task"),
+          string.pred = "Coeffcient",
+          string.ci = "Conf. Int",
+          string.p ="P-Value")#printed table for summary
+
+#plot IQ
+ggplot(new_all_data, aes(x =IQ, y = flanker_correct, color = language)) +
+  geom_point() +
+   scale_fill_discrete(labels=c('Languages','One Language')) +
+  guides(colour = guide_legend(title = "Teachers")) +
+labs(title = "Flanker Task Performance", y= "Correct Trials", x= "Intelligence Quotient") +
+  theme(plot.title=element_text(hjust=0.5))
+
+#plot AGE
+ggplot(new_all_data, aes(x = age, y = flanker_correct, color = language)) +
+  geom_point() +
+   scale_fill_discrete(labels = c('Languages','One Language')) +
+  guides(colour = guide_legend(title = "Teachers")) +
+labs(title = "Flanker Task Performance", y= "Correct Trials", x= "Age") +
+  theme(plot.title=element_text(hjust=0.5))
+
+par(mfrow = c(2,2))
+plot(flanker_data)
+```
+
+
+```{r}
+
+backward_data = lm(backward_correct ~ bilingual+age+IQ, data=new_all_data)
+summary(backward_data)
+
+tbl_regression(backward_data, exponentiate = FALSE) #created table
+summ(backward_data, scale = FALSE) #another table
+
+#Table for backward corsi lm results
+tab_model(backward_data,
+          dv.labels = c("Backward Corsi Task"),
+          string.pred = "Coeffcient",
+          string.p ="P-Value")#printed table for summary
+
+ggplot(new_all_data, aes(x =IQ, y = backward_correct, color = language)) +
+  geom_point() +
+   scale_fill_discrete(labels = c('Languages','One Language')) +
+  guides(colour = guide_legend(title = "Teachers")) +
+labs(title = "Backward Corsi Task Performance", y= "Correct Trials", x= "Intelligence Quotient") +
+  theme(plot.title=element_text(hjust=0.5))
+
+#plot AGE
+ggplot(new_all_data, aes(x =age, y = backward_correct, color = language)) +
+  geom_point() +
+   scale_fill_discrete(labels = c('Languages','One Language')) +
+  guides(colour = guide_legend(title = "Teachers")) +
+labs(title = "Backward Corsi Task Performance", y= "Correct Trials", x= "Age") +
+  theme(plot.title=element_text(hjust=0.5))
+
+
+par(mfrow = c(2,2))
+plot(backward_data)
+```
+
+```{r}
+## Print all 3 regression results
+
+tab_model(flanker_data, backward_data, stroop_data,
+          dv.labels = c("Flanker Task", "Backward Corsi Task", "Stroop Task"),
+string.p ="P-Value")#printed table for summary
+
+```
+
+## Background Questionnaire
+```{r}
+background_survey <- read.csv("~/Desktop/RStudio_QP/experiment_data/background_survey.csv", header = TRUE)
+
+
+#background_survey <- background_survey %>% select(-c(X,Please.enter.your.Prolific.ID...Participant.ID..or.full.name,X.1))
+
+#background_survey %>%
+  #kbl(caption = "Background data") %>%
+ # kable_classic(full_width = F, html_font = "Cambria") 
+
+#str(background_survey)
+
+
+```
+
+
+```{r }
+str(background_survey)
+background_survey$Age <- as.numeric(background_survey$Age)
+background_survey_1  <- background_survey[1:57,] 
+background_survey_1
+
+library(table1)
+table1(~Bilingual + Age + Ethnicity + Experience | Gender , data = background_survey_1) 
+
+table1(~Bilingual + Age+Ethnicity | Gender , data = background_survey_1,topclass = "Rtable1-grid")
+
+
+table1(~Bilingual + Residence + Teaching_Level + Experience | Gender , data = background_survey_1) 
+
+
+```
+
+
+```{r}
+#plot Language
+plot(flanker_correct ~ age + IQ, data = new_language, pch=16)
+
+#linear model
+flanker_model_language <- lm(flanker_correct ~ age + IQ, data = new_language)
+abline(flanker_model_language)
+
+my_results <- tidy(flanker_model_language)
+my_results
+flanker_model_language
+
+summary(flanker_model_language)
+
+par(mfrow = c(2,2)) 
+plot(flanker_model_language) 
+
+par(mfrow = c(2,2)) 
+plot(flanker_model_language, 1)
+
+##
+#plot Language
+par(mfrow = c(2,2))
+plot(stroop_correct ~ age + IQ, data = new_language, pch=16)
+
+#linear model
+stroop_model_language <- lm(stroop_correct ~ age + IQ, data = new_language)
+
+par(mfrow = c(2,2))
+plot(stroop_model_language)
+
+my_results <- tidy(stroop_model_language)
+my_results
+stroop_model_language
+
+summary(stroop_model_language)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
