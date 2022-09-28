@@ -1,5 +1,4 @@
 ---
-title: "About This Website"
+title: "QP"
 ---
 
-More about this website.
